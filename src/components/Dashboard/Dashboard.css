@@ -1,0 +1,92 @@
+.dashboard {
+    display: grid;
+    grid-template-columns: 0.5fr repeat(4, 1fr);
+    grid-template-rows: 0.5fr repeat(4, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    min-height: 100vh;
+}
+    
+.topMenu { 
+    grid-area: 1 / 1 / 2 / 6;
+    background-color: black;
+    color:white;
+    text-align: center;
+    font-size: 4em;
+}
+.leftMenu { 
+    grid-area: 2 / 1 / 6 / 2;
+    grid-template-rows: 0.5fr 10vh auto auto auto auto;
+    background-color: black;
+    color:white;
+    padding: 0;
+    height: auto;
+}
+.main { 
+    grid-area: 2 / 2 / 6 / 6;
+    background-color: black;
+    color:white;
+    min-height: 100vh;
+}
+.leftMenuButton{
+    width: 100%;
+    height: 10vh;
+    font-size: xx-large;
+    background-color: white;
+}
+.leftMenuButton:hover{
+    background-color: rgb(233, 228, 228);
+}
+.projectItem{
+    background-color:gray;
+    padding: 2em;
+    margin-bottom: 5px;
+    font-size: 1.5em;
+}
+
+.modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    width: 400px;
+    text-align: center;
+  }
+  
+.addProjectTitle {
+    margin-bottom: 15px;
+  }
+  
+.addProjectInput {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+ .addProjectButton {
+    background-color: #2325a8;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 5px;
+  }
+  
+.addProjectButton:hover {
+    background-color: #12148f;
+  }
