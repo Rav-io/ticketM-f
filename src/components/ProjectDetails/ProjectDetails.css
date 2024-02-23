@@ -1,0 +1,35 @@
+.projectDetails {
+    display: flex;
+    height: 100vh;
+}
+
+.projectName{
+    text-align: center;
+}
+
+.todo,
+.inProgress,
+.inReview,
+.done {
+    flex: 1;
+    display: block;
+    background-color: black;
+    border:1px gray solid;
+    margin: 1%;
+}
+
+.singleTask{
+    display: flex;
+    padding-left: 2%;
+    border: 1px firebrick solid;
+    flex-direction: column;
+    margin: 3%;
+}
+.saveButton {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    font-size: 16px;
+}

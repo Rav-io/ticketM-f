@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './Dashboard.css';
+import ProjectDetails from '../ProjectDetails/ProjectDetails';
+import ProjectsList from '../ProjectsList/ProjectsList';
+import { useAuth } from '../../Auth';
 import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
@@ -7,7 +10,16 @@ const Dashboard = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newProjectName, setNewProjectName] = useState('');
   const [newProjectAdded, setnewProjectAdded] = useState(false);
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [showProjectsList, setShowProjectsList] = useState(true);
+  const { token } = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!token) {
+      navigate('/');
+    }
+  }, [token, navigate]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,7 +39,7 @@ const Dashboard = () => {
   }, [newProjectAdded]);
 
   const navigateDashboard = () => {
-    navigate('/dashboard');
+    setShowProjectsList(true);
   };
 
   const addProject = () => {
@@ -63,31 +75,35 @@ const Dashboard = () => {
         });
   };
 
+  const handleProjectClick = (projectId) => {
+    setSelectedProject(projectId);
+    setShowProjectsList(false);
+  };
+
   return (
     <div className="dashboard">
       <div className="topMenu">Task Manager</div>
       <div className="leftMenu">
         <button className="leftMenuButton" type="button" onClick={navigateDashboard}>Projects</button>
-        <button className="leftMenuButton" type="button" onClick={addProject}>Add Project</button>
+        {showProjectsList &&
+            <button className="leftMenuButton" type="button" onClick={addProject}>Add Project</button>
+        }
       </div>
       <div className="main">
-      {projects && projects.map((project) => (
-        <div key={project.id}>
-          <div className="projectItem">{project.projectName}</div>
-        </div>
-      ))}
+        {showProjectsList && <ProjectsList projects={projects} onProjectClick={handleProjectClick} />}
+        {!showProjectsList && selectedProject && <ProjectDetails projectId={selectedProject} />}
       </div>
       {isModalOpen && (
         <div className="modal">
           <div className="modal-content">
-            <h2 className="addProjectTitle">Add Project</h2>
-            <input
-              className="addProjectInput"
-              type="text"
-              placeholder="Enter Project Name"
-              value={newProjectName}
-              onChange={(e) => setNewProjectName(e.target.value)}
-            />
+              <h2 className="addProjectTitle">Add Project</h2>
+              <input
+                className="addProjectInput"
+                type="text"
+                placeholder="Enter Project Name"
+                value={newProjectName}
+                onChange={(e) => setNewProjectName(e.target.value)}
+              />
             <button className="addProjectButton" onClick={handleModalSubmit}>Submit</button>
             <button className="addProjectButton" onClick={handleModalClose}>Close</button>
           </div>
