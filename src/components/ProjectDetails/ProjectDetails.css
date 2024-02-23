@@ -1,21 +1,11 @@
 .projectDetails {
     display: flex;
     height: 100vh;
+    text-align: center;
 }
 
 .projectName{
     text-align: center;
-}
-
-.todo,
-.inProgress,
-.inReview,
-.done {
-    flex: 1;
-    display: block;
-    background-color: black;
-    border:1px gray solid;
-    margin: 1%;
 }
 
 .singleTask{

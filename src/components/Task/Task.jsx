@@ -4,14 +4,14 @@ import { useDrag } from 'react-dnd';
 const Task = ({ task }) => {
   const [{ isDragging }, drag] = useDrag({
     type: 'TASK',
-    item: { id: task.id },
+    item: { id: task.id, status: task.taskStatus },
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging(),
     }),
   });
 
   return (
-    <div className='singleTask' ref={drag} style={{ opacity: isDragging ? 0.5 : 1 }}>
+    <div className='singleTask' ref={drag}>
       <strong>Task Name:</strong> {task.taskName}
       <strong>Task Description:</strong> {task.taskDescription}
       <strong>Task Status:</strong> {task.taskStatus}

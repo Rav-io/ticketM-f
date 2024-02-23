@@ -1,10 +1,11 @@
 .todo,
-.inProgress,
-.inReview,
+.inprogress,
+.inreview,
 .done {
     flex: 1;
     display: block;
     background-color: black;
     border:1px gray solid;
-    margin: 1%;
+    margin: 0.7%;
+    padding-top: 20px;
 }

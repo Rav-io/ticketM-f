@@ -24,36 +24,35 @@ const ProjectDetails = ({ projectId }) => {
     }, [projectId]);
   
     const handleDrop = (taskId, status) => {
-      const updatedProjectDetails = {
-        ...projectDetails,
-        tasks: projectDetails.tasks.map((task) =>
-          task.id === taskId ? { ...task, taskStatus: status } : task
-        ),
-      };
-  
-      setProjectDetails(updatedProjectDetails);
+        const updatedProjectDetails = {
+          ...projectDetails,
+          tasks: projectDetails.tasks.map((task) =>
+            task.id === taskId ? { ...task, taskStatus: status } : task
+          ),
+        };
+    
+        setProjectDetails(updatedProjectDetails);
     };
   
     return (
         <DndProvider backend={HTML5Backend}>
-            <div>
-                {projectDetails && (
-                <div>
-                    <h2 className='projectName'>{projectDetails.projectName} Details</h2>
-                    <button className='saveButton' type='button'>
-                    Save
-                    </button>
-                    <div className='projectDetails'>
-                        <StatusColumn status='TODO' tasks={projectDetails.tasks} onDrop={handleDrop} />
-                        <StatusColumn status='IN_PROGRESS' tasks={projectDetails.tasks} onDrop={handleDrop} />
-                        <StatusColumn status='IN_REVIEW' tasks={projectDetails.tasks} onDrop={handleDrop} />
-                        <StatusColumn status='DONE' tasks={projectDetails.tasks} onDrop={handleDrop} />
-                    </div>
+          <div>
+            {projectDetails && (
+              <div>
+                <h2 className='projectName'>{projectDetails.projectName} Details</h2>
+                <button className='saveButton' type='button'>
+                  Save
+                </button>
+                <div className='projectDetails'>
+                  <StatusColumn status='todo' tasks={projectDetails.tasks} onDrop={handleDrop} />
+                  <StatusColumn status='in progress' tasks={projectDetails.tasks} onDrop={handleDrop} />
+                  <StatusColumn status='in review' tasks={projectDetails.tasks} onDrop={handleDrop} />
+                  <StatusColumn status='done' tasks={projectDetails.tasks} onDrop={handleDrop} />
                 </div>
-                
-                )}
-            </div>
-      </DndProvider>
+              </div>
+            )}
+          </div>
+        </DndProvider>
     );
   };
   
