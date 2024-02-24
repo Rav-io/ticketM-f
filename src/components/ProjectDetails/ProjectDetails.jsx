@@ -36,22 +36,19 @@ const ProjectDetails = ({ projectId }) => {
   
     return (
         <DndProvider backend={HTML5Backend}>
-          <div>
-            {projectDetails && (
-              <div>
-                <h2 className='projectName'>{projectDetails.projectName} Details</h2>
-                <button className='saveButton' type='button'>
-                  Save
-                </button>
-                <div className='projectDetails'>
-                  <StatusColumn status='todo' tasks={projectDetails.tasks} onDrop={handleDrop} />
-                  <StatusColumn status='in progress' tasks={projectDetails.tasks} onDrop={handleDrop} />
-                  <StatusColumn status='in review' tasks={projectDetails.tasks} onDrop={handleDrop} />
-                  <StatusColumn status='done' tasks={projectDetails.tasks} onDrop={handleDrop} />
-                </div>
-              </div>
-            )}
-          </div>
+            <div>
+                {projectDetails && (
+                    <div>
+                        <h2 className='projectName'>{projectDetails.projectName} Details</h2>
+                        <div className='projectDetails'>
+                            <StatusColumn status='todo' tasks={projectDetails.tasks} onDrop={handleDrop} />
+                            <StatusColumn status='in progress' tasks={projectDetails.tasks} onDrop={handleDrop} />
+                            <StatusColumn status='in review' tasks={projectDetails.tasks} onDrop={handleDrop} />
+                            <StatusColumn status='done' tasks={projectDetails.tasks} onDrop={handleDrop} />
+                        </div>
+                    </div>
+                )}
+            </div>
         </DndProvider>
     );
   };

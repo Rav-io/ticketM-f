@@ -1,3 +1,6 @@
+button{
+  cursor: pointer;
+}
 .dashboard {
     display: grid;
     grid-template-columns: 0.5fr repeat(4, 1fr);
@@ -34,15 +37,10 @@
     height: 10vh;
     font-size: xx-large;
     background-color: white;
+    border-radius: 20px;
 }
 .leftMenuButton:hover{
     background-color: rgb(233, 228, 228);
-}
-.projectItem{
-    background-color:gray;
-    padding: 2em;
-    margin-bottom: 5px;
-    font-size: 1.5em;
 }
 
 .modal {
@@ -86,6 +84,7 @@
     border-radius: 4px;
     cursor: pointer;
     margin-right: 5px;
+    border-radius: 20px;
   }
   
 .addProjectButton:hover {

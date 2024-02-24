@@ -4,9 +4,10 @@ import ProjectDetails from '../ProjectDetails/ProjectDetails';
 import ProjectsList from '../ProjectsList/ProjectsList';
 import { useAuth } from '../../Auth';
 import { useNavigate } from 'react-router-dom';
+import { useProjectContext} from '../Context';
 
 const Dashboard = () => {
-  const [projects, setProjects] = useState(null);
+  const { setProjects } = useProjectContext();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newProjectName, setNewProjectName] = useState('');
   const [newProjectAdded, setnewProjectAdded] = useState(false);
@@ -90,7 +91,7 @@ const Dashboard = () => {
         }
       </div>
       <div className="main">
-        {showProjectsList && <ProjectsList projects={projects} onProjectClick={handleProjectClick} />}
+        {showProjectsList && <ProjectsList onProjectClick={handleProjectClick} />}
         {!showProjectsList && selectedProject && <ProjectDetails projectId={selectedProject} />}
       </div>
       {isModalOpen && (

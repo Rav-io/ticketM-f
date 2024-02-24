@@ -1,6 +1,9 @@
 import React from 'react';
+import { useProjectContext } from '../Context';
+import './ProjectsList.css';
 
-const ProjectsList = ({ projects, onProjectClick }) => {
+const ProjectsList = ({ onProjectClick }) => {
+  const { projects } = useProjectContext();
   return (
     <div>
       {projects && projects.map((project) => (
