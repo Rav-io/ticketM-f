@@ -3,8 +3,10 @@ import './ProjectDetails.css'
 import StatusColumn from '../StatusColumn/StatusColumn';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import { useProjectContext } from '../Context';
 
 const ProjectDetails = ({ projectId }) => {
+    const { showCreateTaskModal, refreshTasks } = useProjectContext();
     const [projectDetails, setProjectDetails] = useState(null);
   
     useEffect(() => {
@@ -21,7 +23,7 @@ const ProjectDetails = ({ projectId }) => {
         }
       };
       fetchProjectDetails();
-    }, [projectId]);
+    }, [projectId, refreshTasks]);
   
     const handleDrop = (taskId, status) => {
         const updatedProjectDetails = {

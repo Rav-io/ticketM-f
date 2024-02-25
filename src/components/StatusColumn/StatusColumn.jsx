@@ -2,8 +2,11 @@ import React from 'react';
 import Task from '../Task/Task';
 import { useDrop } from 'react-dnd';
 import './StatusColumn.css';
+import CreateTask from '../CreateTask/CreateTask';
+import { useProjectContext } from '../Context';
 
 const StatusColumn = ({ status, tasks, onDrop }) => {
+    const {showCreateTaskModal, setShowCreateTaskModal, setStatusId} = useProjectContext();
     const statusList = [
         { name: 'todo', value: 0 },
         { name: 'in progress', value: 1 },
@@ -15,7 +18,6 @@ const StatusColumn = ({ status, tasks, onDrop }) => {
         accept: 'TASK',
         drop: (item) => {
             const newStatusValue = statusList.find(item => item.name === status).value;
-            console.log(newStatusValue);
             onDrop(item.id, newStatusValue);
             updateTaskStatus(item.id, newStatusValue);
         },
@@ -42,20 +44,22 @@ const StatusColumn = ({ status, tasks, onDrop }) => {
         }
     };
 
-    const addTask = () =>{
-        
+    const addTask = (status) =>{
+        setShowCreateTaskModal(true);
+        setStatusId(status);
     }
 
 
     return (
         <div className={status.replace(/\s/g, '')} ref={drop}>
             <span className='taskStatus'>{status.toUpperCase()}:</span>
-            <div className={`plus ${status.replace(/\s/g, '')}button`} onClick={addTask()}></div>
+            <div className={`plus ${status.replace(/\s/g, '')}button`} onClick={() => addTask(statusList.find(item => item.name === status).value)}></div>
             {tasks
                 .filter((task) => task.taskStatus === statusList.find(item => item.name === status).value)
                 .map((task) => (
                     <Task key={task.id} task={task} />
                 ))}
+            {showCreateTaskModal && <CreateTask/>}
         </div>
     );
 };

@@ -7,11 +7,10 @@ import { useNavigate } from 'react-router-dom';
 import { useProjectContext} from '../Context';
 
 const Dashboard = () => {
-  const { setProjects } = useProjectContext();
+  const { setProjects, selectedProject, setSelectedProject } = useProjectContext();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newProjectName, setNewProjectName] = useState('');
   const [newProjectAdded, setnewProjectAdded] = useState(false);
-  const [selectedProject, setSelectedProject] = useState(null);
   const [showProjectsList, setShowProjectsList] = useState(true);
   const { token } = useAuth();
   const navigate = useNavigate();

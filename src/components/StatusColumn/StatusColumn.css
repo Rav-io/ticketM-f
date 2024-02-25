@@ -31,6 +31,7 @@
     background-repeat:no-repeat;
     position: absolute;
     cursor: pointer;
+    z-index: 1;
 }
 
 .plus.todobutton{
