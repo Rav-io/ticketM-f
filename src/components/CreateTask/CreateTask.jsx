@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import './CreateTask.css';
 import { useProjectContext } from '../Context';
 
@@ -8,6 +8,9 @@ const CreateTask = ( ) => {
     const [selectedUsers, setSelectedUsers] = useState([]);
     const [taskName, setTaskName] = useState('');
     const [taskDescription, setTaskDescription] = useState('');
+    const [errorText, setErrorText] = useState('');
+
+    const modalRef = useRef(null);
 
     useEffect(() => {
         const fetchUsers = async () => {
@@ -31,7 +34,30 @@ const CreateTask = ( ) => {
         setSelectedUsers(selectedUserIds);
     };
 
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (modalRef.current && !modalRef.current.contains(event.target)) {
+                setShowCreateTaskModal(false);
+            }
+        };
+
+        const handleInsideModalClick = (event) => {
+            event.stopPropagation();
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        modalRef.current?.addEventListener('mousedown', handleInsideModalClick);
+    return () => {
+        document.removeEventListener('mousedown', handleClickOutside);
+        modalRef.current?.removeEventListener('mousedown', handleInsideModalClick);
+    };
+    }, [setShowCreateTaskModal]);
+
     const handleSubmit = async () => {
+        if (!taskName.trim() || !taskDescription.trim() || selectedUsers.length === 0) {
+            setErrorText('Task name and description fields are required!');
+            return;
+        }
         setShowCreateTaskModal(false);
     const requestData = {
         taskName: taskName,
@@ -60,8 +86,12 @@ const CreateTask = ( ) => {
     }
     };
 
+    const handleCloseAddTaskModal = () => {
+        setShowCreateTaskModal(false);
+    };
+
     return (
-        <div className='createTaskModal'>
+        <div className='createTaskModal' ref={modalRef} >
             <form>
                 <span>Task Name: </span><br />
                 <input type='text' className='inputTaskName' maxLength='30' value={taskName} onChange={(e) => setTaskName(e.target.value)}></input><br />
@@ -73,7 +103,10 @@ const CreateTask = ( ) => {
                     <option key={user.id} value={user.id}>{user.userName}</option>
                 ))}
                 </select><br />
-                <button className='addTask' type="button" onClick={handleSubmit}>Add Task</button>
+                {errorText && <span style={{ color: 'red' }}>{errorText}</span>}
+                <br />
+                <button className='addTaskButton' type="button" onClick={handleSubmit}>Add Task</button>
+                <button className='addTaskButton' type="button" onClick={handleCloseAddTaskModal}>Close</button>
             </form>
         </div>
     );

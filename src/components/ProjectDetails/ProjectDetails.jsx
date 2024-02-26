@@ -38,7 +38,7 @@ const ProjectDetails = ({ projectId }) => {
   
     return (
         <DndProvider backend={HTML5Backend}>
-            <div>
+            <div className='projectDetailsMain'>
                 {projectDetails && (
                     <div>
                         <h2 className='projectName'>{projectDetails.projectName} Details</h2>

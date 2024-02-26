@@ -24,7 +24,7 @@ button{
     background-color: black;
     color:white;
     padding: 0;
-    height: auto;
+    min-height: 100vh;
 }
 .main { 
     grid-area: 2 / 2 / 6 / 6;

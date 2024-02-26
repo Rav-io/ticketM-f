@@ -53,13 +53,13 @@ const StatusColumn = ({ status, tasks, onDrop }) => {
     return (
         <div className={status.replace(/\s/g, '')} ref={drop}>
             <span className='taskStatus'>{status.toUpperCase()}:</span>
-            <div className={`plus ${status.replace(/\s/g, '')}button`} onClick={() => addTask(statusList.find(item => item.name === status).value)}></div>
             {tasks
                 .filter((task) => task.taskStatus === statusList.find(item => item.name === status).value)
                 .map((task) => (
                     <Task key={task.id} task={task} />
                 ))}
             {showCreateTaskModal && <CreateTask/>}
+            <div className={`plus ${status.replace(/\s/g, '')}button`} onClick={() => addTask(statusList.find(item => item.name === status).value)}></div>
         </div>
     );
 };

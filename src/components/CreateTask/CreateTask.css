@@ -8,6 +8,7 @@
     border:1px gray solid;
     border-radius: 20px;
     z-index: 2;
+    padding: 20px;
 }
 
 .inputTaskName{
@@ -45,14 +46,25 @@
     border-radius: 5px;
     color:white;
     width:20vw;
+    overflow-y: auto;
 }
 
-.addTask{
+.addTaskButton{
     background-color: black;
     border-style: none;
     border:1px gray solid;
     color: white;
+    width: 100px;
+    height: 30px;
+    margin:10px;
 }
-.addTask:hover{
-    background-color: rgb(26, 25, 25);
+.addTaskButton:hover{
+    background-color: rgb(39, 38, 38);
+}
+
+input{
+    margin-bottom: 20px;
+}
+select{
+    margin-bottom: 20px;
 }
