@@ -54,7 +54,7 @@ const CreateTask = ( ) => {
     }, [setShowCreateTaskModal]);
 
     const handleSubmit = async () => {
-        if (!taskName.trim() || !taskDescription.trim() || selectedUsers.length === 0) {
+        if (!taskName.trim() || !taskDescription.trim()) {
             setErrorText('Task name and description fields are required!');
             return;
         }
@@ -94,9 +94,23 @@ const CreateTask = ( ) => {
         <div className='createTaskModal' ref={modalRef} >
             <form>
                 <span>Task Name: </span><br />
-                <input type='text' className='inputTaskName' maxLength='30' value={taskName} onChange={(e) => setTaskName(e.target.value)}></input><br />
+                <input 
+                    type='text' 
+                    className='inputTaskName'
+                    placeholder="Enter Task Name"
+                    maxLength='30' 
+                    value={taskName} 
+                    onChange={(e) => setTaskName(e.target.value)}>
+                </input><br />
                 <span>Task Description: </span><br />
-                <input type='text' className='inputTaskDescription' maxLength='100' value={taskDescription} onChange={(e) => setTaskDescription(e.target.value)}></input><br />
+                <input 
+                    type='text' 
+                    className='inputTaskDescription'
+                    placeholder="Enter Task Description"
+                    maxLength='100'
+                    value={taskDescription} 
+                    onChange={(e) => setTaskDescription(e.target.value)}>
+                </input><br />
                 <span>Select Users: </span><br />
                 <select className="userSelect" multiple value={selectedUsers} onChange={handleUserChange}>
                 {users.map((user) => (

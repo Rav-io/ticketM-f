@@ -1,7 +1,20 @@
-.projectItem{
-    background-color:gray;
-    padding: 2em;
-    margin-bottom: 5px;
-    font-size: 1.5em;
-    border-radius: 20px;
-}
+.projects-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    height: 200px;
+    grid-gap: 20px;
+    color:white;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .project-item {
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 1px white solid;
+  }
+  
+  .project-item:hover {
+    background-color: rgb(48, 46, 46);
+  }

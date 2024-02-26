@@ -41,7 +41,7 @@ const ProjectDetails = ({ projectId }) => {
             <div className='projectDetailsMain'>
                 {projectDetails && (
                     <div>
-                        <h2 className='projectName'>{projectDetails.projectName} Details</h2>
+                        <h2 className='projectName'>{projectDetails.projectName} details</h2>
                         <div className='projectDetails'>
                             <StatusColumn status='todo' tasks={projectDetails.tasks} onDrop={handleDrop} />
                             <StatusColumn status='in progress' tasks={projectDetails.tasks} onDrop={handleDrop} />
