@@ -6,13 +6,7 @@ import CreateTask from '../CreateTask/CreateTask';
 import { useProjectContext } from '../Context';
 
 const StatusColumn = ({ status, tasks, onDrop }) => {
-    const {showCreateTaskModal, setShowCreateTaskModal, setStatusId} = useProjectContext();
-    const statusList = [
-        { name: 'todo', value: 0 },
-        { name: 'in progress', value: 1 },
-        { name: 'in review', value: 2 },
-        { name: 'done', value: 3 },
-    ];
+    const {showCreateTaskModal, setShowCreateTaskModal, setStatusId, statusList} = useProjectContext();
 
     const [, drop] = useDrop({
         accept: 'TASK',

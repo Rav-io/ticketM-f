@@ -1,0 +1,20 @@
+.singleTask {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2%;
+    border: 1px gray solid;
+    margin: 3%;
+    border-radius: 20px;
+}
+
+.showDetailsButton {
+    margin-top: 10px;
+    background-color: rgb(48, 46, 46);
+    color:white;
+}
+
+.showDetailsButton:hover {
+    background-color: rgb(71, 69, 69);
+}

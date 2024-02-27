@@ -1,0 +1,24 @@
+body{
+    background-color: black;
+    color:white;
+}
+.taskData{
+    position: absolute;
+    left: 10%;
+    font-size: 2em;
+}
+
+.taskDetailsBack{
+    height: 6vh;
+    width: 10vh;
+    background-color: black;
+    color:white;
+    border:none;
+    border-bottom: 1px gray solid;
+    border-right: 1px gray solid;
+    margin: 1em;
+}
+
+.taskDetailsBack:hover{
+    background-color: rgb(48, 46, 46);
+}

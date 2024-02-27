@@ -11,6 +11,13 @@ export const ContextProvider = ({ children }) => {
   const [statusId, setStatusId] = useState(null);
   const [refreshTasks, setRefreshTasks] = useState(false);
 
+  const statusList = [
+    { name: 'todo', value: 0 },
+    { name: 'in progress', value: 1 },
+    { name: 'in review', value: 2 },
+    { name: 'done', value: 3 },
+  ];
+
   const contextValue = {
     projects,
     setProjects,
@@ -25,7 +32,8 @@ export const ContextProvider = ({ children }) => {
     showCreateProjectModal,
     setShowCreateProjectModal,
     newProjectAdded,
-    setNewProjectAdded
+    setNewProjectAdded,
+    statusList
   };
 
   return <ProjectContext.Provider value={contextValue}>{children}</ProjectContext.Provider>;
