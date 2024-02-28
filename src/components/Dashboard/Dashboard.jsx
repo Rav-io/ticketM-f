@@ -15,7 +15,7 @@ const Dashboard = () => {
         showCreateProjectModal, 
         setShowCreateProjectModal, 
         newProjectAdded, 
-        setNewProjectAdded } = useProjectContext();
+        setNewProjectAdded, } = useProjectContext();
     const [showProjectsList, setShowProjectsList] = useState(true);
     const [showUsersButton, setShowUsersButton] = useState(false);
     const { token } = useAuth();

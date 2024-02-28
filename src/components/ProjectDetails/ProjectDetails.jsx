@@ -6,7 +6,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useProjectContext } from '../Context';
 
 const ProjectDetails = ({ projectId }) => {
-    const { showCreateTaskModal, refreshTasks } = useProjectContext();
+    const { refreshTasks } = useProjectContext();
     const [projectDetails, setProjectDetails] = useState(null);
   
     useEffect(() => {

@@ -58,32 +58,34 @@ const CreateTask = ( ) => {
             setErrorText('Task name and description fields are required!');
             return;
         }
+
         setShowCreateTaskModal(false);
-    const requestData = {
-        taskName: taskName,
-        taskDescription: taskDescription,
-        taskStatus: statusId,
-        projectId: selectedProject,
-        userIds: selectedUsers,
-    };
 
-    try {
-        const response = await fetch('https://localhost:7091/api/task/addtask', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        body: JSON.stringify(requestData),
-      });
+        const requestData = {
+            taskName: taskName,
+            taskDescription: taskDescription,
+            taskStatus: statusId,
+            projectId: selectedProject,
+            userIds: selectedUsers
+        };
 
-        if (response.ok) {
-            setRefreshTasks(true);
-        } else {
-            console.error('Failed to add task');
+        try {
+            const response = await fetch('https://localhost:7091/api/task/addtask', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            body: JSON.stringify(requestData),
+        });
+
+            if (response.ok) {
+                setRefreshTasks(true);
+            } else {
+                console.error('Failed to add task');
+            }
+        } catch (error) {
+            console.error('Error adding task:', error);
         }
-    } catch (error) {
-        console.error('Error adding task:', error);
-    }
     };
 
     const handleCloseAddTaskModal = () => {
@@ -92,6 +94,10 @@ const CreateTask = ( ) => {
 
     return (
         <div className='createTaskModal' ref={modalRef} >
+            <div className='createIssue'>
+                <span>Create new issue in <b>{selectedProject}</b></span><br />
+            </div>
+            <hr style={{borderColor :'gray'}}></hr>
             <form>
                 <span>Task Name: </span><br />
                 <input 

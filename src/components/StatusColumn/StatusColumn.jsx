@@ -44,6 +44,8 @@ const StatusColumn = ({ status, tasks, onDrop }) => {
     }
 
 
+
+
     return (
         <div className={status.replace(/\s/g, '')} ref={drop}>
             <span className='taskStatus'>{status.toUpperCase()}:</span>

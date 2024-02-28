@@ -20,12 +20,8 @@ const Task = ({ task }) => {
 
     return (
         <div className='singleTask' ref={drag}>
+            <strong>Task #{task.id}</strong>
             <strong>Task Name:</strong> {task.taskName}
-            <strong>Task Description:</strong> {task.taskDescription}
-            <strong>Users:</strong>
-            {task.users.map((user) => (
-                <div key={user.id}>{user.userName}</div>
-            ))}
             <button className="showDetailsButton" onClick={handleTaskClick}>Details</button>
         </div>
     );

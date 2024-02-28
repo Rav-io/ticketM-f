@@ -33,7 +33,7 @@ export const ContextProvider = ({ children }) => {
     setShowCreateProjectModal,
     newProjectAdded,
     setNewProjectAdded,
-    statusList
+    statusList,
   };
 
   return <ProjectContext.Provider value={contextValue}>{children}</ProjectContext.Provider>;

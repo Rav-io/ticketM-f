@@ -27,11 +27,12 @@ const TaskDetails = () => {
                     <strong>Task Name:</strong> {task.taskName}<br/>
                     <strong>Task Description:</strong> {task.taskDescription}<br/>
                     <strong>Task Status:</strong> {getStatusName(task.taskStatus)}<br/>
+                    <strong>Task Created:</strong> 
+                        {task.creationDate.replace('T', ' ').slice(0,-8)}<br />
                     <strong>Users:</strong>
                     {task.users.map((user) => (
                         <div key={user.id}>{user.userName}</div>
                     ))}
-                    <EditIcon style={{ fill: 'white' }} />
                 </div>
         </div>
     );
