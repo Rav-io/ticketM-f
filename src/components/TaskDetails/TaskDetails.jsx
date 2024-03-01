@@ -3,7 +3,6 @@ import { useLocation } from 'react-router-dom';
 import './TaskDetails.css'
 import { useProjectContext } from '../Context';
 import { useNavigate } from 'react-router-dom';
-import { ReactComponent as EditIcon } from "../../icons/edit.svg";
 
 const TaskDetails = () => {
     const {statusList} = useProjectContext();

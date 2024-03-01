@@ -49,7 +49,7 @@ const CreateProject= ( ) => {
                 className="addProjectInput"
                 type="text"
                 placeholder="Enter Project Name"
-                maxLength='100'
+                maxLength='25'
                 value={newProjectName}
                 onChange={(e) => setNewProjectName(e.target.value)}
               />

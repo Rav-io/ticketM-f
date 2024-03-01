@@ -6,6 +6,7 @@ import { useAuth } from '../../Auth';
 import { useNavigate } from 'react-router-dom';
 import { useProjectContext } from '../Context';
 import CreateProject from '../CreateProject/CreateProject';
+import logo from "../../icons/logo.png";
 
 const Dashboard = () => {
     const { 
@@ -61,7 +62,7 @@ const Dashboard = () => {
 
     return (
         <div className="dashboard">
-        <div className="topMenu">Task Manager</div>
+        <div className="topMenu"><img src={logo} className="logo" alt="Logo" /> </div>
         <div className="leftMenu">
             <button className="leftMenuButton" type="button" onClick={navigateDashboard}>Projects</button>
             {showProjectsList &&
@@ -80,4 +81,4 @@ const Dashboard = () => {
     );
     };
 
-    export default Dashboard;
+export default Dashboard;

@@ -33,7 +33,7 @@
   }
   
  .addProjectButton {
-    background-color: #2325a8;
+    background-color: rgb(126, 30, 172);
     color: white;
     padding: 10px 15px;
     border: none;
@@ -44,5 +44,5 @@
   }
   
 .addProjectButton:hover {
-    background-color: #12148f;
+    background-color: rgb(106, 20, 146);;
   }

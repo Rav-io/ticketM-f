@@ -4,84 +4,99 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../Auth';
 
 const LoginPage = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const { login, token } = useAuth();
-  const navigate = useNavigate();
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
+    const { login, token } = useAuth();
+    const navigate = useNavigate();
 
-  useEffect(() => {
-    if (token) {
-      navigate('/dashboard');
-    }
-  }, [token, navigate]);
+    useEffect(() => {
+        if (token) {
+        navigate('/dashboard');
+        }
+    }, [token, navigate]);
 
-  const handleLogin = () => {
-    const apiUrl = 'https://localhost:7091/api/user/login';
+    const loginUser = async (username, password) => {
+        const apiUrl = 'https://localhost:7091/api/user/login';
+        const requestData = {
+        userName: username,
+        password: password,
+        };
 
-    const requestData = {
-      userName: username,
-      password: password,
+        try {
+        const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestData),
+        });
+
+        if (response.ok) {
+            return response.json();
+        } else if (response.status === 401) {
+            throw new Error('Invalid credentials');
+        } else {
+            throw new Error('Login failed');
+        }
+        } catch (error) {
+        throw error;
+        }
     };
 
-    fetch(apiUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(requestData),
-    })
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else if (response.status === 401) {
-          setError('Invalid credentials');
-        } else {
-          throw new Error('Login failed');
+    const handleLogin = async () => {
+        try {
+            setLoading(true);
+            const data = await loginUser(username, password);
+            login(data.token);
+            navigate('/dashboard');
+        } catch (error) {
+            setError(error.message);
+            console.error('Error during login:', error);
+        } finally {
+            setLoading(false);
         }
-      })
-      .then((data) => {
-        login(data.token);
-        navigate('/dashboard');
-      })
-      .catch((error) => {
-        console.error('Error during login:', error);
-      });
-  };
+    };
 
-  return (
-    <div className="loginPageContainer">
+    return (
+        <div className="loginPageContainer">
         <div className="login_form">
-          <h2 className="login">Login</h2>
-          <form className="loginForm">
+            <h2 className="login">Login</h2>
+            <form className="loginForm">
             <label className="loginLabel">
-              Username:
-              <input
+                Username:
+                <input
                 className="loginInput"
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-              />
+                />
             </label>
             <br />
             <label className="loginLabel">
-              Password:
-              <input
+                Password:
+                <input
                 className="loginInput"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-              />
+                />
             </label>
-            {error && <div className="error">{error}</div>}
+            {error && <div className="error">Incorrect username or password.</div>}
             <br />
-            <button className="loginButton" type="button" onClick={handleLogin}>
-              Login
+            <button
+                className="loginButton"
+                type="button"
+                onClick={handleLogin}
+                disabled={loading}
+            >
+                {loading ? 'Logging in...' : 'Login'}
             </button>
-          </form>
+            </form>
         </div>
-    </div>
-  );
+        </div>
+    );
 };
 
 export default LoginPage;
