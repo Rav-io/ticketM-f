@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './Dashboard.css';
 import ProjectDetails from '../ProjectDetails/ProjectDetails';
 import ProjectsList from '../ProjectsList/ProjectsList';
+import AssignToProject from '../AssignUser/AssignToProject';
 import { useAuth } from '../../Auth';
 import { useNavigate } from 'react-router-dom';
 import { useProjectContext } from '../Context';
@@ -12,15 +13,16 @@ const Dashboard = () => {
     const { 
         setProjects, 
         selectedProject, 
-        setSelectedProject, 
-        showCreateProjectModal, 
-        setShowCreateProjectModal, 
+        setSelectedProject,
         newProjectAdded, 
         setNewProjectAdded, } = useProjectContext();
     const [showProjectsList, setShowProjectsList] = useState(true);
     const [showUsersButton, setShowUsersButton] = useState(false);
+    const [showAssignUsersModal, setShowAssignUsersModal] = useState(false);
+    const [showCreateProjectModal, setShowCreateProjectModal] = useState(false);
     const { token } = useAuth();
     const navigate = useNavigate();
+    const modalRef = useRef(null);
 
     useEffect(() => {
         if (!token) {
@@ -60,6 +62,10 @@ const Dashboard = () => {
         setShowUsersButton(true);
     };
 
+    const assignUsers = () => {
+        setShowAssignUsersModal(true);
+    };
+
     return (
         <div className="dashboard">
         <div className="topMenu"><img src={logo} className="logo" alt="Logo" /> </div>
@@ -69,14 +75,15 @@ const Dashboard = () => {
                 <button className="leftMenuButton" type="button" onClick={addProject}>Add Project</button>
             }
             {showUsersButton &&
-                <button className="leftMenuButton" type="button">Users</button>
+                <button className="leftMenuButton" type="button" onClick={assignUsers}>Users</button>
             }
         </div>
         <div className="main">
             {showProjectsList && <ProjectsList onProjectClick={handleProjectClick} />}
             {!showProjectsList && selectedProject && <ProjectDetails projectId={selectedProject} />}
         </div>
-        {showCreateProjectModal && <CreateProject/>}
+        {showAssignUsersModal && <AssignToProject closeModal={setShowAssignUsersModal}/>}
+        {showCreateProjectModal && <CreateProject closeModal={setShowCreateProjectModal}/>}
         </div>
     );
     };

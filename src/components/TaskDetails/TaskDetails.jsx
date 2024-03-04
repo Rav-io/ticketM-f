@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import './TaskDetails.css'
 import { useProjectContext } from '../Context';
 import { useNavigate } from 'react-router-dom';
+import logo from "../../icons/logo.png";
 
 const TaskDetails = () => {
     const {statusList} = useProjectContext();
@@ -21,6 +22,8 @@ const TaskDetails = () => {
 
     return (
         <div className='taskDetails'>
+            <div className="topMenu"><img src={logo} className="logo" alt="Logo" /> </div>
+            <hr></hr>
             <button className='taskDetailsBack' onClick={handleDetailsBack}>Back</button>
                 <div className='taskData'>
                     <strong>Task Name:</strong> {task.taskName}<br/>

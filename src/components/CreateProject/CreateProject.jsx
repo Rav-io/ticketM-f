@@ -3,13 +3,13 @@ import './CreateProject.css';
 import { useProjectContext } from '../Context';
 
 
-const CreateProject= ( ) => {
-    const { setShowCreateProjectModal, setNewProjectAdded } = useProjectContext();
+const CreateProject= ({closeModal}) => {
+    const { setNewProjectAdded } = useProjectContext();
     const [newProjectName, setNewProjectName] = useState('');
     const [errorText, setErrorText] = useState('');
 
     const handleModalClose = () => {
-        setShowCreateProjectModal(false);
+        closeModal(false);
         setNewProjectName('');
       };
     
@@ -31,7 +31,7 @@ const CreateProject= ( ) => {
         })
             .then((response) => {
                 if (response.ok) {
-                    setShowCreateProjectModal(false);
+                    closeModal(false);
                     setNewProjectName('');
                     setNewProjectAdded(true);
                 }

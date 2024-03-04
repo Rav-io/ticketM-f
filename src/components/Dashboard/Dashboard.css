@@ -11,7 +11,7 @@ button{
 }
     
 .topMenu { 
-    grid-area: 1 / 1 / 2 / 6;
+    grid-area: 1 / 1 / 2 / 2;
     background-color: black;
     color:white;
     text-align: center;
@@ -22,7 +22,7 @@ button{
     align-items: center;
 }
 .logo{
-    margin-left: 3%;
+    margin-left: 3rem;
 }
 .leftMenu { 
     grid-area: 2 / 1 / 6 / 2;
@@ -35,7 +35,7 @@ button{
     border-right:1px gray solid;
 }
 .main { 
-    grid-area: 2 / 2 / 6 / 6;
+    grid-area: 1 / 2 / 6 / 6;
     background-color: black;
     color:white;
     min-height: 100vh;
@@ -52,7 +52,4 @@ button{
 }
 .leftMenuButton:hover{
     background-color: rgb(48, 46, 46);
-}
-svg{
-    background-color: red;
 }

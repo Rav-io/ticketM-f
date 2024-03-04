@@ -1,5 +1,6 @@
 body{
     color:white;
+    background-color: black;
 }
 .taskData{
     position: absolute;
@@ -20,4 +21,24 @@ body{
 
 .taskDetailsBack:hover{
     background-color: rgb(48, 46, 46);
+}
+
+.topMenu { 
+    grid-area: 1 / 1 / 2 / 6;
+    background-color: black;
+    color:white;
+    text-align: center;
+    font-size: 4em;
+    min-height: 17vh;
+    display: flex;
+    left:20%;
+    align-items: center;
+}
+
+.logo{
+    margin-left: 3rem;
+}
+
+hr{
+    border-color: gray;
 }
