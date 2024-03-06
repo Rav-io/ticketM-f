@@ -15,8 +15,8 @@
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    max-height: 80%; /* Set a maximum height for the modal content */
-    overflow-y: auto; /* Add a scrollbar if the content overflows */
+    max-height: 80%;
+    overflow-y: auto;
 }
 
 .assignUsersTitle {
@@ -45,6 +45,7 @@
 
 .x {
     padding-top: 7px;
+    cursor: pointer;
 }
 
 .assignUserButton {
@@ -61,4 +62,14 @@
   
 .assignUserButton:hover {
     background-color: rgb(106, 20, 146);;
+}
+
+.userNameAssign {
+    margin-bottom: 5px;
+    padding: 5px;
+    background-color: #f2f2f2;
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
