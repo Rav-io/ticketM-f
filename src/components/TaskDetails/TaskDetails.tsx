@@ -5,13 +5,27 @@ import { useProjectContext } from '../Context';
 import { useNavigate } from 'react-router-dom';
 import logo from "../../icons/logo.png";
 
+interface User {
+    id: number;
+    userName: string;
+}
+
+interface Task {
+    id: number;
+    taskName: string;
+    taskDescription: string;
+    taskStatus: number;
+    creationDate: string;
+    users: User[];
+}
+
 const TaskDetails = () => {
-    const {statusList} = useProjectContext();
+    const { statusList } = useProjectContext();
     const navigate = useNavigate();
     const location = useLocation();
-    const task = location.state.task;
+    const task: Task = (location.state as any)?.task;
 
-    const getStatusName = (statusValue) => {
+    const getStatusName = (statusValue:number) => {
         const statusObject = statusList.find(item => item.value === statusValue);
         return statusObject ? String(statusObject.name) : null;
     };

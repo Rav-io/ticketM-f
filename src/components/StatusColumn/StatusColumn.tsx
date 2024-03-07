@@ -1,23 +1,35 @@
-import React from 'react';
 import Task from '../Task/Task';
 import { useDrop } from 'react-dnd';
 import './StatusColumn.css';
 import CreateTask from '../CreateTask/CreateTask';
 import { useProjectContext } from '../Context';
 
-const StatusColumn = ({ status, tasks, onDrop }) => {
+interface StatusColumnProps {
+    status: string;
+    tasks: Task[];
+    onDrop: (taskId: number, newStatusValue: number) => void;
+}
+
+interface Task {
+    id: number;
+    taskStatus: number;
+}
+
+const StatusColumn = ({ status, tasks, onDrop }:StatusColumnProps) => {
     const {showCreateTaskModal, setShowCreateTaskModal, setStatusId, statusList} = useProjectContext();
 
     const [, drop] = useDrop({
         accept: 'TASK',
-        drop: (item) => {
-            const newStatusValue = statusList.find(item => item.name === status).value;
-            onDrop(item.id, newStatusValue);
-            updateTaskStatus(item.id, newStatusValue);
+        drop: (item: { id: number }) => {
+            const newStatusValue = statusList.find((item) => item.name === status)?.value;
+            if (newStatusValue !== undefined) {
+                onDrop(item.id, newStatusValue);
+                updateTaskStatus(item.id, newStatusValue);
+            }
         },
     });
 
-    const updateTaskStatus = async (taskId, newStatusValue) => {
+    const updateTaskStatus = async (taskId:number, newStatusValue:number) => {
         const apiEndpoint = `https://localhost:7091/api/task/updatetaskstatus/${taskId}`;
         try {
             const response = await fetch(apiEndpoint, {
@@ -38,24 +50,20 @@ const StatusColumn = ({ status, tasks, onDrop }) => {
         }
     };
 
-    const addTask = (status) =>{
+    const addTask = (status:number | undefined) => {
         setShowCreateTaskModal(true);
-        setStatusId(status);
+        setStatusId(status || null);
     }
-
-
-
-
     return (
         <div className={status.replace(/\s/g, '')} ref={drop}>
             <span className='taskStatus'>{status.toUpperCase()}:</span>
             {tasks
-                .filter((task) => task.taskStatus === statusList.find(item => item.name === status).value)
+                .filter((task) => task.taskStatus === statusList.find(item => item.name === status)?.value)
                 .map((task) => (
                     <Task key={task.id} task={task} />
                 ))}
             {showCreateTaskModal && <CreateTask/>}
-            <div className={`plus ${status.replace(/\s/g, '')}button`} onClick={() => addTask(statusList.find(item => item.name === status).value)}></div>
+            <div className={`plus ${status.replace(/\s/g, '')}button`} onClick={() => addTask(statusList.find(item => item.name === status)?.value)}></div>
         </div>
     );
 };

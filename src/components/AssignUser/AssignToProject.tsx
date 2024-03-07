@@ -3,12 +3,25 @@ import './AssignToProject.css'
 import { useProjectContext } from '../Context';
 import { X, Check } from 'lucide-react';
 
-const AssignToProject = ({closeModal}) =>{
-    const { projects, selectedProject } = useProjectContext();
-    const [users, setUsers] = useState([]);
-    const [assignedUsers, setAssignedUsers] = useState([]);
+interface AssignToProjectProps {
+    closeModal: (value: boolean) => void;
+}
+interface User {
+    id: number;
+    userName: string;
+}
+
+interface AssignedUser {
+    userId: number;
+    userName: string;
+}
+
+const AssignToProject = ({closeModal}:AssignToProjectProps) =>{
+    const { selectedProject } = useProjectContext();
+    const [users, setUsers] = useState<User[]>([]);
+    const [assignedUsers, setAssignedUsers] = useState<AssignedUser[]>([]);
     const [addUser, setAddUser] = useState(true);
-    const [selectedUsers, setSelectedUsers] = useState([]);
+    const [selectedUsers, setSelectedUsers] = useState<number[]>([]);
     const [renderList, setRenderList] = useState(false);
 
     useEffect(() => {
@@ -72,7 +85,7 @@ const AssignToProject = ({closeModal}) =>{
         }
     };
 
-    const handleUserSelect = (userId) => {
+    const handleUserSelect = (userId:number) => {
         setSelectedUsers((prevSelectedUsers) => {
             if (prevSelectedUsers.includes(userId)) {
                 return prevSelectedUsers.filter((id) => id !== userId);
@@ -82,7 +95,7 @@ const AssignToProject = ({closeModal}) =>{
         });
     };
 
-    const handleX = (selectedUser) => {
+    const handleX = (selectedUser:number) => {
         const unassignData = {
             id: selectedProject,
             userId: selectedUser
@@ -105,44 +118,52 @@ const AssignToProject = ({closeModal}) =>{
     }
 
     return (
-        <div className="modal">
-            <div className="modal-content">
-                {addUser ? (
-                    <div>
-                        <h2 className="assignUsersTitle">Users</h2>
-                        <div className='users'>
-                            {assignedUsers.map((user) => (
-                                <div className='userName' key={user.userId}>
-                                    <span>{user.userName}</span>
-                                        <div className='x'>
-                                            <X size={20} color="red" onClick={() => handleX(user.userId)}/>
-                                        </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                ) :
-                <div>
-                <h2 className="assignUsersTitle">Assign users</h2>
-                    <div className='users'>
-                        {users.filter(user => 
-                            !assignedUsers.some(assignedUser => assignedUser.userId === user.id)
-                        ).map(user => (
-                            <div className='userNameAssign' key={user.id} style={{ backgroundColor: selectedUsers.includes(user.id) ? '#d6d5d5' : '#f2f2f2' }}>
-                                <span>{user.userName}</span>
-                                <div className='x'>
-                                    <Check size={20} color="green" onClick={() => handleUserSelect(user.id)}/>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
+    <div className="modal">
+      <div className="modal-content">
+        {addUser ? (
+          <div>
+            <h2 className="assignUsersTitle">Users</h2>
+            <div className="users">
+              {assignedUsers.map((user) => (
+                <div className="userName" key={user.userId}>
+                  <span>{user.userName}</span>
+                  <div className="x">
+                    <X size={20} color="red" onClick={() => handleX(user.userId)} />
+                  </div>
                 </div>
-                }
-                <button className="assignUserButton" onClick={handleAssignUserButton}>Add Users</button>
-                <button className="assignUserButton" onClick={handleModalClose}>Close</button>
+              ))}
             </div>
-        </div>
-    );
+          </div>
+        ) : (
+          <div>
+            <h2 className="assignUsersTitle">Assign users</h2>
+            <div className="users">
+              {users
+                .filter((user) => !assignedUsers.some((assignedUser) => assignedUser.userId === user.id))
+                .map((user) => (
+                  <div
+                    className="userNameAssign"
+                    key={user.id}
+                    style={{ backgroundColor: selectedUsers.includes(user.id) ? '#d6d5d5' : '#f2f2f2' }}
+                  >
+                    <span>{user.userName}</span>
+                    <div className="x">
+                      <Check size={20} color="green" onClick={() => handleUserSelect(user.id)} />
+                    </div>
+                  </div>
+                ))}
+            </div>
+          </div>
+        )}
+        <button className="assignUserButton" onClick={handleAssignUserButton}>
+          Add Users
+        </button>
+        <button className="assignUserButton" onClick={handleModalClose}>
+          Close
+        </button>
+      </div>
+    </div>
+  );
 }
 
 export default AssignToProject;

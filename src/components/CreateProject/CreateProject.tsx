@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 import './CreateProject.css';
 import { useProjectContext } from '../Context';
 
+interface CreateProjectProps {
+  closeModal: (value: boolean) => void;
+}
 
-const CreateProject= ({closeModal}) => {
+const CreateProject = ({closeModal}:CreateProjectProps) => {
     const { setNewProjectAdded } = useProjectContext();
-    const [newProjectName, setNewProjectName] = useState('');
-    const [errorText, setErrorText] = useState('');
+    const [newProjectName, setNewProjectName] = useState<string>('');
+    const [errorText, setErrorText] = useState<string>('');
 
     const handleModalClose = () => {
         closeModal(false);
@@ -49,7 +52,7 @@ const CreateProject= ({closeModal}) => {
                 className="addProjectInput"
                 type="text"
                 placeholder="Enter Project Name"
-                maxLength='25'
+                maxLength={25}
                 value={newProjectName}
                 onChange={(e) => setNewProjectName(e.target.value)}
               />
