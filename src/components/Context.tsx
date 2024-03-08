@@ -62,10 +62,10 @@ export const ContextProvider: React.FC<ContextProviderProps> = ({ children }) =>
     return <ProjectContext.Provider value={contextValue}>{children}</ProjectContext.Provider>;
 };
 
-export const useProjectContext = (): ProjectContextProps => {
+export const useProjectContext = () => {
     const context = useContext(ProjectContext);
     if (!context) {
-        throw new Error('useProjectContext must be used within a ContextProvider');
+        throw new Error('useContext error');
     }
     return context;
 };

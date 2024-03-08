@@ -1,6 +1,6 @@
 body{
     color:white;
-    background-color: black;
+    background-color: #1e293b;
 }
 .taskData{
     position: absolute;
@@ -11,7 +11,7 @@ body{
 .taskDetailsBack{
     height: 6vh;
     width: 10vh;
-    background-color: black;
+    background-color: #1e293b;
     color:white;
     border:none;
     border-bottom: 1px gray solid;
@@ -20,25 +20,8 @@ body{
 }
 
 .taskDetailsBack:hover{
-    background-color: rgb(48, 46, 46);
+    background-color: #0f172a;
 }
-
-.topMenu { 
-    grid-area: 1 / 1 / 2 / 6;
-    background-color: black;
-    color:white;
-    text-align: center;
-    font-size: 4em;
-    min-height: 17vh;
-    display: flex;
-    left:20%;
-    align-items: center;
-}
-
-.logo{
-    margin-left: 3rem;
-}
-
 hr{
-    border-color: gray;
+    border-color: #64748b;
 }

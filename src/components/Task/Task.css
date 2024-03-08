@@ -4,17 +4,17 @@
     align-items: center;
     justify-content: center;
     padding: 2%;
-    border: 1px gray solid;
+    border: 2px #64748b solid;
     margin: 3%;
     border-radius: 20px;
 }
 
 .showDetailsButton {
     margin-top: 10px;
-    background-color: rgb(48, 46, 46);
+    background-color: #1e293b;
     color:white;
 }
 
 .showDetailsButton:hover {
-    background-color: rgb(71, 69, 69);
+    background-color: #334155;
 }

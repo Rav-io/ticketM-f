@@ -3,20 +3,22 @@ import { useDrop } from 'react-dnd';
 import './StatusColumn.css';
 import CreateTask from '../CreateTask/CreateTask';
 import { useProjectContext } from '../Context';
+import { useAuth } from '../../Auth';
 
 interface StatusColumnProps {
     status: string;
-    tasks: Task[];
+    tasks: SingleTask[];
     onDrop: (taskId: number, newStatusValue: number) => void;
 }
 
-interface Task {
+interface SingleTask {
     id: number;
     taskStatus: number;
 }
 
 const StatusColumn = ({ status, tasks, onDrop }:StatusColumnProps) => {
     const {showCreateTaskModal, setShowCreateTaskModal, setStatusId, statusList} = useProjectContext();
+    const { token } = useAuth();
 
     const [, drop] = useDrop({
         accept: 'TASK',
@@ -35,6 +37,7 @@ const StatusColumn = ({ status, tasks, onDrop }:StatusColumnProps) => {
             const response = await fetch(apiEndpoint, {
                 method: 'PUT',
                 headers: {
+                    'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
@@ -52,7 +55,7 @@ const StatusColumn = ({ status, tasks, onDrop }:StatusColumnProps) => {
 
     const addTask = (status:number | undefined) => {
         setShowCreateTaskModal(true);
-        setStatusId(status || null);
+        setStatusId(status === undefined ? null : status);
     }
     return (
         <div className={status.replace(/\s/g, '')} ref={drop}>

@@ -1,9 +1,8 @@
-import React from 'react';
 import { useLocation } from 'react-router-dom';
 import './TaskDetails.css'
 import { useProjectContext } from '../Context';
 import { useNavigate } from 'react-router-dom';
-import logo from "../../icons/logo.png";
+import TopMenu from '../TopMenu/TopMenu';
 
 interface User {
     id: number;
@@ -36,7 +35,7 @@ const TaskDetails = () => {
 
     return (
         <div className='taskDetails'>
-            <div className="topMenu"><img src={logo} className="logo" alt="Logo" /> </div>
+            <TopMenu />
             <hr></hr>
             <button className='taskDetailsBack' onClick={handleDetailsBack}>Back</button>
                 <div className='taskData'>

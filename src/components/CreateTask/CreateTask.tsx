@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import './CreateTask.css';
 import { useProjectContext } from '../Context';
+import { useAuth } from '../../Auth';
+
 
 interface User {
     id: number;
@@ -14,13 +16,18 @@ const CreateTask = () => {
     const [taskName, setTaskName] = useState<string>('');
     const [taskDescription, setTaskDescription] = useState<string>('');
     const [errorText, setErrorText] = useState<string>('');
-
+    const { token } = useAuth();
     const modalRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await fetch('https://localhost:7091/api/user/getusers');
+                const response = await fetch('https://localhost:7091/api/user/getusers', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json',
+                    },
+                });
                 if (!response.ok) {
                     throw new Error('Failed to fetch users');
                 }
@@ -32,7 +39,7 @@ const CreateTask = () => {
         };
 
         fetchUsers();
-    }, []);
+    }, [token]);
 
     const handleUserChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const selectedUserIds = Array.from(e.target.selectedOptions, (option) => Number(option.value));
@@ -40,24 +47,22 @@ const CreateTask = () => {
     };
 
     useEffect(() => {
+        const modalNode = modalRef.current;
         const handleClickOutside = (event: MouseEvent) => {
-            if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+            if (modalNode && !modalNode.contains(event.target as Node)) {
                 setShowCreateTaskModal(false);
             }
         };
-
         const handleInsideModalClick = (event: MouseEvent) => {
             event.stopPropagation();
         };
-
         document.addEventListener('mousedown', handleClickOutside);
-        modalRef.current?.addEventListener('mousedown', handleInsideModalClick);
-
+        modalNode?.addEventListener('mousedown', handleInsideModalClick);
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
-            modalRef.current?.removeEventListener('mousedown', handleInsideModalClick);
+            modalNode?.removeEventListener('mousedown', handleInsideModalClick);
         };
-    }, [setShowCreateTaskModal]);
+    }, [setShowCreateTaskModal, modalRef]);
 
     const handleSubmit = async () => {
         if (!taskName.trim() || !taskDescription.trim()) {
@@ -79,13 +84,14 @@ const CreateTask = () => {
             const response = await fetch('https://localhost:7091/api/task/addtask', {
                 method: 'POST',
                 headers: {
+                    'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(requestData),
             });
 
             if (response.ok) {
-                setRefreshTasks(true);
+                setRefreshTasks((prevRefreshTasks) => !prevRefreshTasks);
             } else {
                 console.error('Failed to add task');
             }
@@ -101,11 +107,11 @@ const CreateTask = () => {
     return (
         <div className='createTaskModal' ref={modalRef} >
             <div className='createIssue'>
-                <span>Create new issue in <b>{selectedProject}</b></span><br />
+                <span><b>Create new issue </b></span><br />
             </div>
-            <hr style={{ borderColor: 'gray' }}></hr>
+            <hr style={{ borderColor: '#64748b' }}></hr>
             <form>
-                <span>Task Name: </span><br />
+                <span><b>Task Name: </b></span><br />
                 <input
                     type='text'
                     className='inputTaskName'
@@ -114,7 +120,7 @@ const CreateTask = () => {
                     value={taskName}
                     onChange={(e) => setTaskName(e.target.value)}>
                 </input><br />
-                <span>Task Description: </span><br />
+                <span><b>Task Description: </b></span><br />
                 <input
                     type='text'
                     className='inputTaskDescription'
@@ -123,7 +129,7 @@ const CreateTask = () => {
                     value={taskDescription}
                     onChange={(e) => setTaskDescription(e.target.value)}>
                 </input><br />
-                <span>Select Users: </span><br />
+                <span><b>Select Users: </b></span><br />
                 <select className="userSelect" multiple value={selectedUsers.map(String)} onChange={handleUserChange}>
                     {users.map((user) => (
                         <option key={user.id} value={user.id}>{user.userName}</option>

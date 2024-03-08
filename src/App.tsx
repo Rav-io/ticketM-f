@@ -5,6 +5,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import { AuthProvider } from './Auth';
 import { ContextProvider } from "./components/Context";
 import TaskDetails from "./components/TaskDetails/TaskDetails";
+import ProjectDetails from "./components/ProjectDetails/ProjectDetails";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
                     <Routes>
                         <Route path="/" element={<LoginPage />} />
                         <Route path="/dashboard" element={<Dashboard />} />
+                        <Route path="/project/:id" element={<ProjectDetails />} />
                         <Route path="/task/:taskId" element={<TaskDetails />} />
                     </Routes>
                 </Router>

@@ -8,21 +8,21 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-  }
+}
   
 .modal-content {
-    background-color: white;
+    background-color: #cbd5e1;
     color:black;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     width: 400px;
     text-align: center;
-  }
+}
   
 .addProjectTitle {
     margin-bottom: 15px;
-  }
+}
   
 .addProjectInput {
     width: 90%;
@@ -30,10 +30,10 @@
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 4px;
-  }
+}
   
  .addProjectButton {
-    background-color: rgb(126, 30, 172);
+    background-color: #475569;
     color: white;
     padding: 10px 15px;
     border: none;
@@ -41,8 +41,13 @@
     cursor: pointer;
     margin-right: 5px;
     border-radius: 20px;
-  }
+}
   
 .addProjectButton:hover {
-    background-color: rgb(106, 20, 146);;
-  }
+    background-color: #334155;
+}
+
+::placeholder {
+  color: #475569;
+  opacity: 1;
+}

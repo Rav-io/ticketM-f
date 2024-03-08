@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './CreateProject.css';
 import { useProjectContext } from '../Context';
+import { useAuth } from '../../Auth';
 
 interface CreateProjectProps {
   closeModal: (value: boolean) => void;
@@ -10,6 +11,7 @@ const CreateProject = ({closeModal}:CreateProjectProps) => {
     const { setNewProjectAdded } = useProjectContext();
     const [newProjectName, setNewProjectName] = useState<string>('');
     const [errorText, setErrorText] = useState<string>('');
+    const { token } = useAuth();
 
     const handleModalClose = () => {
         closeModal(false);
@@ -28,7 +30,8 @@ const CreateProject = ({closeModal}:CreateProjectProps) => {
         fetch("https://localhost:7091/api/project/create", {
             method: 'POST',
             headers: {
-              'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify(requestData),
         })

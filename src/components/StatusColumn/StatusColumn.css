@@ -4,9 +4,9 @@
 .done {
     flex: 1;
     display: block;
-    background-color: black;
-    border:1px gray solid;
-    margin: 0.7%;
+    background-color: #1e293b;
+    border: 2px #64748b solid;
+    margin: 0.9%;
     overflow-y: auto;
 }
 
@@ -21,7 +21,7 @@
     background:
       linear-gradient(#fff 0 0),
       linear-gradient(#fff 0 0),
-      #000;
+      #1e293b;
     background-position:center;
     background-size: 50% 1px,1px 50%;
     background-repeat:no-repeat;
@@ -32,7 +32,7 @@
 }
 
 .plus:hover{
-    background-color: rgb(48, 46, 46);
+    background-color: #334155;
 }
 
 .todo::-webkit-scrollbar,

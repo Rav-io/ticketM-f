@@ -1,0 +1,15 @@
+.topMenu { 
+    grid-area: 1 / 1 / 2 / 2;
+    background-color: #1e293b;
+    color:white;
+    text-align: center;
+    font-size: 4em;
+    min-height: 17vh;
+    display: flex;
+    left:20%;
+    align-items: center;
+}
+
+img{
+    cursor: pointer;
+}

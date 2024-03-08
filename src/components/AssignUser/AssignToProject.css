@@ -36,7 +36,7 @@
 .userName {
     margin-bottom: 5px;
     padding: 5px;
-    background-color: #f2f2f2;
+    background-color: #e2e8f0;
     border-radius: 3px;
     display: flex;
     justify-content: center;
@@ -49,7 +49,7 @@
 }
 
 .assignUserButton {
-    background-color: rgb(126, 30, 172);
+    background-color: #475569;
     color: white;
     padding: 10px 15px;
     margin-top: 10px;
@@ -61,7 +61,7 @@
 }
   
 .assignUserButton:hover {
-    background-color: rgb(106, 20, 146);;
+    background-color: #334155;
 }
 
 .userNameAssign {

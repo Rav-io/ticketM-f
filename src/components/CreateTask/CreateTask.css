@@ -1,55 +1,58 @@
 .createTaskModal{
     position: fixed;
-    background-color: black;
+    background-color: #cbd5e1;
     width: 40vw;
     height: 50vh;
     left: 30vw;
     top: 20vh;
-    border:1px gray solid;
+    border: 2px #0f172a solid;
     border-radius: 20px;
     z-index: 2;
+    color:black;
 }
 
 .inputTaskName{
-    background-color: black;
+    background-color: white;
     border-style: none;
-    border:1px gray solid;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    color:white;
+    color:black;
     width: 10vw;
     height: 2vh;
 }
 
 .inputTaskDescription{
-    background-color: black;
+    background-color: white;
     border-style: none;
-    border:1px gray solid;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    color:white;
+    color:black;
     width: 20vw;
     height: 2vh;
 }
 
 .inputStatus{
-    background-color: black;
+    background-color: white;
     border-style: none;
-    border:1px gray solid;
+    border: 1px solid #ccc;
     border-radius: 5px;
     color:white;
     text-align: center;
 }
 
 .addTaskButton{
-    background-color: black;
-    border-style: none;
-    border:1px gray solid;
+    background-color: #475569;
     color: white;
-    width: 100px;
-    height: 30px;
-    margin:10px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 5px;
+    margin-top: 20px;
+    border-radius: 20px;
 }
 .addTaskButton:hover{
-    background-color: rgb(39, 38, 38);
+    background-color: #334155;
 }
 
 input{
@@ -60,6 +63,7 @@ select{
 }
 .createIssue{
     top: 10px;
+    font-size: large;
 }
 .createIssue{
     padding: 10px;
@@ -69,8 +73,8 @@ select{
 }
 
 .userSelect {
-    background-color: black;
-    border: 1px gray solid;
+    background-color: white;
+    border: 1px solid #ccc;
     border-radius: 5px;
     color: white;
     width: 20vw;
@@ -80,6 +84,11 @@ select{
 }
 
 .userSelect option {
-    background-color: black;
-    color: white;
+    background-color: white;
+    color: black;
+}
+
+::placeholder {
+    color: #475569;
+    opacity: 1;
 }

@@ -1,15 +1,14 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import './Dashboard.css';
 import ProjectDetails from '../ProjectDetails/ProjectDetails';
 import ProjectsList from '../ProjectsList/ProjectsList';
-import AssignToProject from '../AssignUser/AssignToProject';
 import { useAuth } from '../../Auth';
 import { useNavigate } from 'react-router-dom';
 import { useProjectContext } from '../Context';
 import CreateProject from '../CreateProject/CreateProject';
-import logo from "../../icons/logo.png";
+import TopMenu from '../TopMenu/TopMenu';
 
-const Dashboard: React.FC = () => {
+const Dashboard = () => {
     const { 
         setProjects, 
         selectedProject, 
@@ -17,12 +16,9 @@ const Dashboard: React.FC = () => {
         newProjectAdded, 
         setNewProjectAdded, } = useProjectContext();
     const [showProjectsList, setShowProjectsList] = useState(true);
-    const [showUsersButton, setShowUsersButton] = useState(false);
-    const [showAssignUsersModal, setShowAssignUsersModal] = useState(false);
     const [showCreateProjectModal, setShowCreateProjectModal] = useState(false);
     const { token } = useAuth();
     const navigate = useNavigate();
-    const modalRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         if (!token) {
@@ -33,7 +29,12 @@ const Dashboard: React.FC = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('https://localhost:7091/api/project');
+                const response = await fetch('https://localhost:7091/api/project', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json',
+                    },
+                });
                 if (!response.ok) {
                     throw new Error('Failed to fetch project data');
                 }
@@ -45,11 +46,10 @@ const Dashboard: React.FC = () => {
         };
         fetchData();
         setNewProjectAdded(false);
-    }, [newProjectAdded]);
+    }, [newProjectAdded, setNewProjectAdded, setProjects, token]);
 
     const navigateDashboard = () => {
         setShowProjectsList(true);
-        setShowUsersButton(false);
     };
 
     const addProject = () => {
@@ -59,30 +59,22 @@ const Dashboard: React.FC = () => {
     const handleProjectClick = (projectId: number) => {
         setSelectedProject(projectId);
         setShowProjectsList(false);
-        setShowUsersButton(true);
-    };
-
-    const assignUsers = () => {
-        setShowAssignUsersModal(true);
+        navigate(`/project/${projectId}`);
     };
 
     return (
         <div className="dashboard">
-            <div className="topMenu"><img src={logo} className="logo" alt="Logo" /> </div>
+            <TopMenu />
             <div className="leftMenu">
                 <button className="leftMenuButton" type="button" onClick={navigateDashboard}>Projects</button>
                 {showProjectsList &&
                     <button className="leftMenuButton" type="button" onClick={addProject}>Add Project</button>
                 }
-                {showUsersButton &&
-                    <button className="leftMenuButton" type="button" onClick={assignUsers}>Users</button>
-                }
             </div>
             <div className="main">
                 {showProjectsList && <ProjectsList onProjectClick={handleProjectClick} />}
-                {!showProjectsList && selectedProject && <ProjectDetails projectId={selectedProject} />}
+                {!showProjectsList && selectedProject && <ProjectDetails />}
             </div>
-            {showAssignUsersModal && <AssignToProject closeModal={setShowAssignUsersModal}/>}
             {showCreateProjectModal && <CreateProject closeModal={setShowCreateProjectModal}/>}
         </div>
     );

@@ -1,4 +1,3 @@
-import React from 'react';
 import { useProjectContext } from '../Context';
 import './ProjectsList.css';
 import user from "../../icons/profile.png";

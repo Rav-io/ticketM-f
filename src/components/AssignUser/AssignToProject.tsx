@@ -1,7 +1,8 @@
-import React, {useState,useEffect} from 'react';
+import {useState,useEffect} from 'react';
 import './AssignToProject.css'
 import { useProjectContext } from '../Context';
 import { X, Check } from 'lucide-react';
+import { useAuth } from '../../Auth';
 
 interface AssignToProjectProps {
     closeModal: (value: boolean) => void;
@@ -23,11 +24,17 @@ const AssignToProject = ({closeModal}:AssignToProjectProps) =>{
     const [addUser, setAddUser] = useState(true);
     const [selectedUsers, setSelectedUsers] = useState<number[]>([]);
     const [renderList, setRenderList] = useState(false);
+    const { token } = useAuth();
 
     useEffect(() => {
         const fetchUsers = async () => {
         try {
-            const response = await fetch(`https://localhost:7091/api/project/${selectedProject}/users`);
+            const response = await fetch(`https://localhost:7091/api/project/${selectedProject}/users`, {
+              headers: {
+                  'Authorization': `Bearer ${token}`,
+                  'Content-Type': 'application/json',
+              },
+        });
             if (!response.ok) {
             throw new Error('Failed to fetch users');
             }
@@ -38,7 +45,7 @@ const AssignToProject = ({closeModal}:AssignToProjectProps) =>{
         }
         };
         fetchUsers();
-    }, [renderList]);
+    }, [renderList, selectedProject, token]);
 
     const handleModalClose = () => {
         closeModal(false);
@@ -48,7 +55,12 @@ const AssignToProject = ({closeModal}:AssignToProjectProps) =>{
         if(addUser){
             const fetchUsers = async () => {
                 try {
-                    const response = await fetch('https://localhost:7091/api/user/getusers');
+                    const response = await fetch('https://localhost:7091/api/user/getusers', {
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Content-Type': 'application/json',
+                        },
+                    });
                     if (!response.ok) {
                     throw new Error('Failed to fetch users');
                     }
@@ -68,7 +80,8 @@ const AssignToProject = ({closeModal}:AssignToProjectProps) =>{
             fetch("https://localhost:7091/api/project/assign", {
                 method: 'POST',
                 headers: {
-                'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(assignData),
             })
@@ -103,6 +116,7 @@ const AssignToProject = ({closeModal}:AssignToProjectProps) =>{
         fetch("https://localhost:7091/api/project/unassign", {
             method: 'POST',
             headers: {
+                'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json',
             },
             body: JSON.stringify(unassignData),
