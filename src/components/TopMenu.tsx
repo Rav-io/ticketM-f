@@ -1,5 +1,4 @@
-import logo from "../../icons/logo.png";
-import './TopMenu.css'
+import logo from "../icons/logo.png";
 import { useNavigate } from 'react-router-dom';
 
 const TaskDetails = () => {

@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from 'react';
-import './CreateTask.css';
 import { useProjectContext } from '../Context';
 import { useAuth } from '../../Auth';
 
@@ -105,41 +104,43 @@ const CreateTask = () => {
     };
 
     return (
-        <div className='createTaskModal' ref={modalRef} >
-            <div className='createIssue'>
-                <span><b>Create new issue </b></span><br />
+        <div className="modalTask">
+            <div className='createTaskModal' ref={modalRef} >
+                <div className='createIssue'>
+                    <span><b>Create new issue </b></span><br />
+                </div>
+                <hr style={{ borderColor: '#64748b' }}></hr>
+                <form>
+                    <span><b>Task Name: </b></span><br />
+                    <input
+                        type='text'
+                        className='inputTaskName'
+                        placeholder="Enter Task Name"
+                        maxLength={30}
+                        value={taskName}
+                        onChange={(e) => setTaskName(e.target.value)}>
+                    </input><br />
+                    <span><b>Task Description: </b></span><br />
+                    <input
+                        type='text'
+                        className='inputTaskDescription'
+                        placeholder="Enter Task Description"
+                        maxLength={100}
+                        value={taskDescription}
+                        onChange={(e) => setTaskDescription(e.target.value)}>
+                    </input><br />
+                    <span><b>Select Users: </b></span><br />
+                    <select className="userSelect" multiple value={selectedUsers.map(String)} onChange={handleUserChange}>
+                        {users.map((user) => (
+                            <option key={user.id} value={user.id}>{user.userName}</option>
+                        ))}
+                    </select><br />
+                    {errorText && <span style={{ color: 'red' }}>{errorText}</span>}
+                    <br />
+                    <button className='addTaskButton' type="button" onClick={handleSubmit}>Add Task</button>
+                    <button className='addTaskButton' type="button" onClick={handleCloseAddTaskModal}>Close</button>
+                </form>
             </div>
-            <hr style={{ borderColor: '#64748b' }}></hr>
-            <form>
-                <span><b>Task Name: </b></span><br />
-                <input
-                    type='text'
-                    className='inputTaskName'
-                    placeholder="Enter Task Name"
-                    maxLength={30}
-                    value={taskName}
-                    onChange={(e) => setTaskName(e.target.value)}>
-                </input><br />
-                <span><b>Task Description: </b></span><br />
-                <input
-                    type='text'
-                    className='inputTaskDescription'
-                    placeholder="Enter Task Description"
-                    maxLength={100}
-                    value={taskDescription}
-                    onChange={(e) => setTaskDescription(e.target.value)}>
-                </input><br />
-                <span><b>Select Users: </b></span><br />
-                <select className="userSelect" multiple value={selectedUsers.map(String)} onChange={handleUserChange}>
-                    {users.map((user) => (
-                        <option key={user.id} value={user.id}>{user.userName}</option>
-                    ))}
-                </select><br />
-                {errorText && <span style={{ color: 'red' }}>{errorText}</span>}
-                <br />
-                <button className='addTaskButton' type="button" onClick={handleSubmit}>Add Task</button>
-                <button className='addTaskButton' type="button" onClick={handleCloseAddTaskModal}>Close</button>
-            </form>
         </div>
     );
 };

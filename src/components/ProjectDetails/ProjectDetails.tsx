@@ -1,13 +1,17 @@
 import { useState, useEffect } from 'react';
-import './ProjectDetails.css';
-import StatusColumn from '../StatusColumn/StatusColumn';
+import StatusColumn from './StatusColumn';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useProjectContext } from '../Context';
 import { useAuth } from '../../Auth';
 import { useParams, useNavigate } from 'react-router-dom';
-import AssignToProject from '../AssignUser/AssignToProject';
-import TopMenu from '../TopMenu/TopMenu';
+import AssignToProject from './AssignToProject';
+import TopMenu from '../TopMenu';
+
+interface User {
+    id: number;
+    userName: string;
+}
 
 interface IProjectDetails {
     projectName: string;
@@ -17,6 +21,10 @@ interface IProjectDetails {
 interface Task {
     id: number;
     taskStatus: number;
+    taskDescription: string;
+    creationDate: string;
+    taskName?: string;
+    users: User[];
 }
 
 const ProjectDetails = () => {
@@ -27,6 +35,12 @@ const ProjectDetails = () => {
     const { id } = useParams();
     const projectId = parseInt(id || '', 10);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!token) {   
+            navigate('/');
+        }
+    }, [token, navigate]);
 
     useEffect(() => {
         const fetchProjectDetails = async () => {
@@ -43,11 +57,12 @@ const ProjectDetails = () => {
             const data = await response.json();
             setProjectDetails(data);
         } catch (error:any) {
+            navigate('/dashboard');
             console.log(error.message);
         }
         };
         fetchProjectDetails();
-    }, [projectId, refreshTasks, token]);
+    }, [projectId, refreshTasks, token, navigate]);
 
     const handleDrop = (taskId: number, status: number) => {
         if (projectDetails) {

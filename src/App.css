@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+body {
+  font-family: "Open Sans", sans-serif;
+}
 .App {
   text-align: center;
 }
@@ -36,3 +40,596 @@
     transform: rotate(360deg);
   }
 }
+
+.loginPageContainer {
+  background: #334155;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.login_form {
+  display: inline-block;
+  text-align: left;
+  background-color: #cbd5e1;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.login {
+  color: #333;
+  padding-left: 36%;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.loginLabel {
+  color:black;
+  margin-bottom: 1px;
+}
+
+.loginInput {
+  padding: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+.loginButton {
+  background-color: #1e293b;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.loginButton:hover {
+  background-color: #334155;
+}
+
+.error{
+  color: red;
+  text-align: center;
+  border-radius: 5px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1em;
+  font-weight: bold;
+}
+button{
+  cursor: pointer;
+}
+.dashboard {
+    display: grid;
+    grid-template-columns: 0.5fr repeat(4, 1fr);
+    grid-template-rows: 0.5fr repeat(4, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    min-height: 100vh;
+}
+.logo{
+    margin-left: 3rem;
+}
+.main { 
+    grid-area: 1 / 2 / 6 / 6;
+    background-color: #1e293b;
+    color:white;
+    min-height: 100vh;
+    padding-top: 140px;
+}
+
+.modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: #cbd5e1;
+  color:black;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  width: 400px;
+  text-align: center;
+}
+
+.addProjectTitle {
+  margin-bottom: 15px;
+}
+
+.addProjectInput {
+  width: 90%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.addProjectButton {
+  background-color: #475569;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 5px;
+  border-radius: 20px;
+}
+
+.addProjectButton:hover {
+  background-color: #334155;
+}
+
+::placeholder {
+color: #475569;
+opacity: 1;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  max-height: 80%;
+  overflow-y: auto;
+}
+
+.assignUsersTitle {
+  text-align: center;
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.users {
+  display: flex;
+  flex-direction: column;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.userName {
+  margin-bottom: 5px;
+  padding: 5px;
+  background-color: #f2f2f2;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.x {
+  padding-top: 7px;
+  cursor: pointer;
+}
+
+.assignUserButton {
+  background-color: #475569;
+  color: white;
+  padding: 10px 15px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 5px;
+  border-radius: 20px;
+}
+
+.assignUserButton:hover {
+  background-color: #334155;
+}
+
+.userNameAssign {
+  margin-bottom: 5px;
+  padding: 5px;
+  background-color: #f2f2f2;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.createTaskModal{
+  position: fixed;
+  background-color: #cbd5e1;
+  width: 40vw;
+  height: 50vh;
+  left: 30vw;
+  top: 30vh;
+  border: 2px #0f172a solid;
+  border-radius: 20px;
+  z-index: 2;
+  color:black;
+}
+
+.inputTaskName{
+  background-color: white;
+  border-style: none;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  color:black;
+  width: 10vw;
+  height: 2vh;
+}
+
+.inputTaskDescription{
+  background-color: white;
+  border-style: none;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  color:black;
+  width: 20vw;
+  height: 2vh;
+}
+
+.inputStatus{
+  background-color: white;
+  border-style: none;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  color:white;
+  text-align: center;
+}
+
+.addTaskButton{
+  background-color: #475569;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 5px;
+  margin-top: 20px;
+  border-radius: 20px;
+}
+.addTaskButton:hover{
+  background-color: #334155;
+}
+
+input{
+  margin-bottom: 20px;
+}
+select{
+  margin-bottom: 20px;
+}
+.createIssue{
+  top: 10px;
+  font-size: large;
+}
+.createIssue{
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.userSelect {
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  color: white;
+  width: 20vw;
+  height: 10vh;
+  padding: 5px;
+  margin-bottom: 20px;
+}
+
+.userSelect option {
+  background-color: white;
+  color: black;
+}
+
+::placeholder {
+  color: #475569;
+  opacity: 1;
+}
+
+.projectColumns {
+  display: flex;
+  height: 100vh;
+  text-align: center;
+}
+
+.projectName{
+  text-align: center;
+  font-size: 3rem;
+}
+
+.singleTask{
+  display: flex;
+  padding-left: 2%;
+  border: 2px #64748b solid;
+  flex-direction: column;
+  margin: 3%;
+  border-radius: 20px;
+}
+
+.projectDetails {
+  display: grid;
+  grid-template-columns: 0.5fr repeat(4, 1fr);
+  grid-template-rows: 0.5fr repeat(4, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  min-height: 100vh;
+}
+.leftMenu { 
+  grid-area: 2 / 1 / 6 / 2;
+  grid-template-rows: 0.5fr 10vh auto auto auto auto;
+  background-color: #1e293b;
+  color:white;
+  padding: 0;
+  min-height: 100vh;
+  border-top: 2px #64748b solid;
+  border-right:2px #64748b solid;
+}
+.leftMenuButton{
+  width: 100%;
+  height: 10vh;
+  font-size: xx-large;
+  background-color: #1e293b;
+  border: none;
+  border-bottom: 2px #64748b solid;
+  color:white
+}
+.leftMenuButton:hover{
+  background-color: #334155;
+}
+.projectDetailsMain{
+  grid-area: 1 / 2 / 6 / 6;
+  background-color: #1e293b;
+  color:white;
+  min-height: 100vh;
+}
+
+.projects-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  height: 200px;
+  grid-gap: 20px;
+  color:white;
+  padding: 20px;
+  text-align: center;
+}
+
+.project-item {
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 1px white solid;
+}
+
+.project-item:hover {
+  background-color: #334155;
+}
+
+.user-image{
+  height: 30px;
+  width: 30px;
+}
+
+.user-images{
+padding-top: 40%;
+}
+
+.projects-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  height: 200px;
+  grid-gap: 20px;
+  color:white;
+  padding: 20px;
+  text-align: center;
+}
+
+.project-item {
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 1px white solid;
+}
+
+.project-item:hover {
+  background-color: #334155;
+}
+
+.user-image{
+  height: 30px;
+  width: 30px;
+}
+
+.user-images{
+padding-top: 40%;
+}
+
+.todo,
+.inprogress,
+.inreview,
+.done {
+    flex: 1;
+    display: block;
+    background-color: #1e293b;
+    border: 2px #64748b solid;
+    margin: 0.9%;
+    overflow-y: auto;
+}
+
+.taskStatus{
+    font-weight: bold;
+    font-size: 2em;
+}
+
+.plus {
+    width:50px;
+    height:50px;
+    background:
+      linear-gradient(#fff 0 0),
+      linear-gradient(#fff 0 0),
+      #1e293b;
+    background-position:center;
+    background-size: 50% 1px,1px 50%;
+    background-repeat:no-repeat;
+    cursor: pointer;
+    z-index: 1; 
+    display: flex;
+    margin-left: 44%;
+}
+
+.plus:hover{
+    background-color: #334155;
+}
+
+.todo::-webkit-scrollbar,
+.inprogress::-webkit-scrollbar,
+.inreview::-webkit-scrollbar,
+.done::-webkit-scrollbar {
+    width: 10px;
+    margin-top: 30px;
+}
+.todo::-webkit-scrollbar-track,
+.inprogress::-webkit-scrollbar-track,
+.inreview::-webkit-scrollbar-track,
+.done::-webkit-scrollbar-track {
+    border-radius: 8px;
+    background-color: #1e293b;
+} 
+.todo::-webkit-scrollbar-thumb,
+.inprogress::-webkit-scrollbar-thumb,
+.inreview::-webkit-scrollbar-thumb,
+.done::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background-color: #cbd5e1;
+} 
+
+.singleTask {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2%;
+  border: 2px #64748b solid;
+  margin: 3%;
+  border-radius: 20px;
+}
+
+.showDetailsButton {
+  margin-top: 10px;
+  background-color: #1e293b;
+  color:white;
+}
+
+.showDetailsButton:hover {
+  background-color: #334155;
+}
+
+.topMenu { 
+  grid-area: 1 / 1 / 2 / 2;
+  background-color: #1e293b;
+  color:white;
+  text-align: center;
+  font-size: 4em;
+  min-height: 17vh;
+  display: flex;
+  left:20%;
+  align-items: center;
+}
+
+img{
+  cursor: pointer;
+}
+
+.errorPage{
+  background-color: #1e293b;
+  width: 100vw;
+  height: 100vh;
+  color: white;
+  font-size: 3em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.modalTask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.taskDetailsModal{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+.taskData{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  line-height:  2;
+}
+.taskDetailsBack {
+  background-color: #475569;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 5px;
+  border-radius: 20px;
+}
+
+.taskDetailsBack:hover {
+  background-color: #334155;
+}
+.taskDetailsModal{
+  position: fixed;
+  background-color: #cbd5e1;
+  width: 40vw;
+  height: 50vh;
+  left: 30vw;
+  top: 30vh;
+  border: 2px #0f172a solid;
+  border-radius: 20px;
+  z-index: 2;
+  color:black;
+}
+
+

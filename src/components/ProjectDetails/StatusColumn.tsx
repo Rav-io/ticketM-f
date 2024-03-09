@@ -1,10 +1,12 @@
-import Task from '../Task/Task';
+import Task from './Task';
 import { useDrop } from 'react-dnd';
-import './StatusColumn.css';
-import CreateTask from '../CreateTask/CreateTask';
 import { useProjectContext } from '../Context';
 import { useAuth } from '../../Auth';
 
+interface User {
+    id: number;
+    userName: string;
+}
 interface StatusColumnProps {
     status: string;
     tasks: SingleTask[];
@@ -14,12 +16,15 @@ interface StatusColumnProps {
 interface SingleTask {
     id: number;
     taskStatus: number;
+    taskDescription: string;
+    creationDate: string;
+    taskName?: string;
+    users: User[];
 }
 
 const StatusColumn = ({ status, tasks, onDrop }:StatusColumnProps) => {
-    const {showCreateTaskModal, setShowCreateTaskModal, setStatusId, statusList} = useProjectContext();
+    const { setShowCreateTaskModal, setStatusId, statusList} = useProjectContext();
     const { token } = useAuth();
-
     const [, drop] = useDrop({
         accept: 'TASK',
         drop: (item: { id: number }) => {
@@ -64,8 +69,7 @@ const StatusColumn = ({ status, tasks, onDrop }:StatusColumnProps) => {
                 .filter((task) => task.taskStatus === statusList.find(item => item.name === status)?.value)
                 .map((task) => (
                     <Task key={task.id} task={task} />
-                ))}
-            {showCreateTaskModal && <CreateTask/>}
+            ))}
             <div className={`plus ${status.replace(/\s/g, '')}button`} onClick={() => addTask(statusList.find(item => item.name === status)?.value)}></div>
         </div>
     );

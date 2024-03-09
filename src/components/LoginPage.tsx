@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
-import './LoginPage.css';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../Auth';
+import { useAuth } from '../Auth';
 
 const LoginPage = () => {
     const [username, setUsername] = useState<string>('');
@@ -71,6 +70,7 @@ const LoginPage = () => {
                             type="text"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
+                            style={error ? { border: '1px solid red' } : { border: '1px solid black' }}
                         />
                     </label>
                     <br />
@@ -81,6 +81,7 @@ const LoginPage = () => {
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
+                            style={error ? { border: '1px solid red' } : { border: '1px solid black' }}
                         />
                     </label>
                     {error && <div className="error">Incorrect username or password.</div>}

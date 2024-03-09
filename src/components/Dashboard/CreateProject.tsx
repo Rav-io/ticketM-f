@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import './CreateProject.css';
 import { useProjectContext } from '../Context';
 import { useAuth } from '../../Auth';
 

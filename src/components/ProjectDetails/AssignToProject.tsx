@@ -1,5 +1,4 @@
 import {useState,useEffect} from 'react';
-import './AssignToProject.css'
 import { useProjectContext } from '../Context';
 import { X, Check } from 'lucide-react';
 import { useAuth } from '../../Auth';

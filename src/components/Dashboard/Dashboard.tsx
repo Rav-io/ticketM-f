@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
-import './Dashboard.css';
 import ProjectDetails from '../ProjectDetails/ProjectDetails';
-import ProjectsList from '../ProjectsList/ProjectsList';
+import ProjectsList from './ProjectsList';
 import { useAuth } from '../../Auth';
 import { useNavigate } from 'react-router-dom';
 import { useProjectContext } from '../Context';
-import CreateProject from '../CreateProject/CreateProject';
-import TopMenu from '../TopMenu/TopMenu';
+import CreateProject from './CreateProject';
+import TopMenu from '../TopMenu';
 
 const Dashboard = () => {
     const { 
@@ -17,11 +16,11 @@ const Dashboard = () => {
         setNewProjectAdded, } = useProjectContext();
     const [showProjectsList, setShowProjectsList] = useState(true);
     const [showCreateProjectModal, setShowCreateProjectModal] = useState(false);
-    const { token } = useAuth();
+    const { token, logout } = useAuth();
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (!token) {
+        if (!token) {   
             navigate('/');
         }
     }, [token, navigate]);
@@ -62,10 +61,16 @@ const Dashboard = () => {
         navigate(`/project/${projectId}`);
     };
 
+    const handleLogout = () => {
+        logout();
+        navigate('/');
+    };
+
     return (
         <div className="dashboard">
             <TopMenu />
             <div className="leftMenu">
+            <button className="leftMenuButton" type="button" onClick={handleLogout}>Logout</button>
                 <button className="leftMenuButton" type="button" onClick={navigateDashboard}>Projects</button>
                 {showProjectsList &&
                     <button className="leftMenuButton" type="button" onClick={addProject}>Add Project</button>
