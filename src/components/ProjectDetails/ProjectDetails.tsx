@@ -25,6 +25,7 @@ interface Task {
     creationDate: string;
     taskName?: string;
     users: User[];
+    createdBy: string;
 }
 
 const ProjectDetails = () => {

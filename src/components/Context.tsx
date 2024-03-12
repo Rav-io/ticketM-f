@@ -20,6 +20,8 @@ interface ProjectContextProps {
     newProjectAdded: boolean;
     setNewProjectAdded: React.Dispatch<React.SetStateAction<boolean>>;
     statusList: { name: string; value: number }[];
+    currentUser: string | null;
+    setCurrentUser: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
 const ProjectContext = createContext<ProjectContextProps | undefined>(undefined);
@@ -35,6 +37,7 @@ export const ContextProvider: React.FC<ContextProviderProps> = ({ children }) =>
     const [newProjectAdded, setNewProjectAdded] = useState(false);
     const [statusId, setStatusId] = useState<number | null>(null);
     const [refreshTasks, setRefreshTasks] = useState(false);
+    const [currentUser, setCurrentUser] = useState<string | null>('');
 
     const statusList = [
         { name: 'todo', value: 0 },
@@ -57,6 +60,8 @@ export const ContextProvider: React.FC<ContextProviderProps> = ({ children }) =>
         newProjectAdded,
         setNewProjectAdded,
         statusList,
+        currentUser,
+        setCurrentUser
     };
 
     return <ProjectContext.Provider value={contextValue}>{children}</ProjectContext.Provider>;

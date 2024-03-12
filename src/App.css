@@ -589,15 +589,6 @@ img{
   z-index: 1;
 }
 
-.taskDetailsModal{
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.2);
-  z-index: 1;
-}
 .taskData{
   display:flex;
   justify-content: center;
@@ -614,22 +605,92 @@ img{
   cursor: pointer;
   margin-right: 5px;
   border-radius: 20px;
+  position: absolute;
+  bottom: 10%;
+  left:50%;
+  margin-left: 10px;
 }
 
 .taskDetailsBack:hover {
   background-color: #334155;
 }
+
+.taskDetailsSave {
+  background-color: #475569;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 5px;
+  border-radius: 20px;
+  position: absolute;
+  bottom: 10%;
+  left:40%;
+}
+
+.taskDetailsSave:hover {
+  background-color: #334155;
+}
+
 .taskDetailsModal{
   position: fixed;
   background-color: #cbd5e1;
   width: 40vw;
   height: 50vh;
   left: 30vw;
-  top: 30vh;
+  top: 25vh;
   border: 2px #0f172a solid;
   border-radius: 20px;
   z-index: 2;
   color:black;
+  padding: 20px;
 }
 
+select option:checked{
+  background: #64748b -webkit-linear-gradient(bottom, #64748b 0%, #64748b 100%);
+}
+
+.taskDetailsTitle{
+  font-size: 2em;
+}
+
+.taskDetailsStatus{
+  position: absolute;
+  left:85%;
+  top:5%;
+}
+
+.user-image{
+  cursor: default;
+}
+
+.taskDetailsAssignees {
+  position: absolute;
+  left: 7%;
+  bottom: 10%;
+  text-align: left;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.taskDetailsAssignees > div {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.user-image {
+  width: 24px;
+  height: 24px;
+  margin-right: 5px;
+}
+.taskDetailsDescription{
+  position: absolute;
+  text-align: left;
+  left:7%;
+  margin-top: 10px;
+  width: 86%;
+  height: 40%;
+}
 

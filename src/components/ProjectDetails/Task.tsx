@@ -15,11 +15,12 @@ interface TaskProps {
         creationDate: string;
         taskName?: string;
         users: User[];
+        createdBy: string;
     };
 }
 
 const Task = ({ task }:TaskProps) => {
-    const [showCreateTaskModal, setShowTaskDetailsModal] = useState(false);
+    const [showTaskDetailsModal, setShowTaskDetailsModal] = useState(false);
 
     const [{ isDragging }, drag] = useDrag({
         type: 'TASK',
@@ -42,7 +43,7 @@ const Task = ({ task }:TaskProps) => {
                     Details
                 </button>
             </div>
-            {showCreateTaskModal && <TaskDetails currentTask={task} showModal={setShowTaskDetailsModal}/>}
+            {showTaskDetailsModal && <TaskDetails currentTask={task} showModal={setShowTaskDetailsModal}/>}
         </div>
     );
 };

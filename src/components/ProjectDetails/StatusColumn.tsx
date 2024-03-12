@@ -2,6 +2,7 @@ import Task from './Task';
 import { useDrop } from 'react-dnd';
 import { useProjectContext } from '../Context';
 import { useAuth } from '../../Auth';
+import CreateTask from './CreateTask';
 
 interface User {
     id: number;
@@ -20,10 +21,11 @@ interface SingleTask {
     creationDate: string;
     taskName?: string;
     users: User[];
+    createdBy: string;
 }
 
 const StatusColumn = ({ status, tasks, onDrop }:StatusColumnProps) => {
-    const { setShowCreateTaskModal, setStatusId, statusList} = useProjectContext();
+    const { showCreateTaskModal, setShowCreateTaskModal, setStatusId, statusList} = useProjectContext();
     const { token } = useAuth();
     const [, drop] = useDrop({
         accept: 'TASK',
@@ -62,6 +64,7 @@ const StatusColumn = ({ status, tasks, onDrop }:StatusColumnProps) => {
         setShowCreateTaskModal(true);
         setStatusId(status === undefined ? null : status);
     }
+
     return (
         <div className={status.replace(/\s/g, '')} ref={drop}>
             <span className='taskStatus'>{status.toUpperCase()}:</span>
@@ -71,6 +74,7 @@ const StatusColumn = ({ status, tasks, onDrop }:StatusColumnProps) => {
                     <Task key={task.id} task={task} />
             ))}
             <div className={`plus ${status.replace(/\s/g, '')}button`} onClick={() => addTask(statusList.find(item => item.name === status)?.value)}></div>
+            {showCreateTaskModal && <CreateTask />}
         </div>
     );
 };

@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../Auth';
+import { useProjectContext } from './Context';
 
 const LoginPage = () => {
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [error, setError] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(false);
+    const { setCurrentUser } = useProjectContext();
     const { login, token } = useAuth();
     const navigate = useNavigate();
 
@@ -16,7 +18,7 @@ const LoginPage = () => {
         }
     }, [token, navigate]);
 
-    const loginUser = async (username: string, password: string): Promise<{ token: string }> => {
+    const loginUser = async (username: string, password: string): Promise<{ token: string, user: string }> => {
         const apiUrl = 'https://localhost:7091/api/user/login';
         const requestData = {
             userName: username,
@@ -49,6 +51,7 @@ const LoginPage = () => {
             setLoading(true);
             const data = await loginUser(username, password);
             login(data.token);
+            setCurrentUser(data.user)
             navigate('/dashboard');
         } catch (error:any) {
             setError(error.message);

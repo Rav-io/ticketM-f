@@ -2,14 +2,13 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useProjectContext } from '../Context';
 import { useAuth } from '../../Auth';
 
-
 interface User {
     id: number;
     userName: string;
 }
 
 const CreateTask = () => {
-    const { selectedProject, setShowCreateTaskModal, statusId, setRefreshTasks } = useProjectContext();
+    const { selectedProject, setShowCreateTaskModal, statusId, setRefreshTasks, currentUser } = useProjectContext();
     const [users, setUsers] = useState<User[]>([]);
     const [selectedUsers, setSelectedUsers] = useState<number[]>([]);
     const [taskName, setTaskName] = useState<string>('');
@@ -77,6 +76,7 @@ const CreateTask = () => {
             taskStatus: statusId,
             projectId: selectedProject,
             userIds: selectedUsers,
+            createdBy: currentUser,
         };
 
         try {
