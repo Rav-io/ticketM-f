@@ -5,6 +5,7 @@ import { useAuth } from '../../Auth';
 import { useNavigate } from 'react-router-dom';
 import { useProjectContext } from '../Context';
 import CreateProject from './CreateProject';
+import CreateUser from './CreateUser';
 import TopMenu from '../TopMenu';
 
 const Dashboard = () => {
@@ -13,9 +14,11 @@ const Dashboard = () => {
         selectedProject, 
         setSelectedProject,
         newProjectAdded, 
-        setNewProjectAdded, } = useProjectContext();
+        setNewProjectAdded,
+        currentUserRole, } = useProjectContext();
     const [showProjectsList, setShowProjectsList] = useState(true);
     const [showCreateProjectModal, setShowCreateProjectModal] = useState(false);
+    const [showCreateUserModal, setShowCreateUserModal] = useState(false);
     const { token, logout } = useAuth();
     const navigate = useNavigate();
 
@@ -66,6 +69,10 @@ const Dashboard = () => {
         navigate('/');
     };
 
+    const adduser = () => {
+        setShowCreateUserModal(true);
+    };
+
     return (
         <div className="dashboard">
             <TopMenu />
@@ -73,14 +80,18 @@ const Dashboard = () => {
             <button className="leftMenuButton" type="button" onClick={handleLogout}>Logout</button>
                 <button className="leftMenuButton" type="button" onClick={navigateDashboard}>Projects</button>
                 {showProjectsList &&
-                    <button className="leftMenuButton" type="button" onClick={addProject}>Add Project</button>
+                    <div>
+                        {currentUserRole === "Admin" && <button className="leftMenuButton" type="button" onClick={addProject}>Add Project</button>}
+                        {currentUserRole === "Admin" && <button className="leftMenuButton" type="button" onClick={adduser}>Add User</button>}
+                    </div>
                 }
             </div>
             <div className="main">
                 {showProjectsList && <ProjectsList onProjectClick={handleProjectClick} />}
                 {!showProjectsList && selectedProject && <ProjectDetails />}
             </div>
-            {showCreateProjectModal && <CreateProject closeModal={setShowCreateProjectModal}/>}
+            {showCreateProjectModal && <CreateProject openModal={setShowCreateProjectModal}/>}
+            {showCreateUserModal && <CreateUser openModal={setShowCreateUserModal}/>}
         </div>
     );
 };

@@ -82,7 +82,8 @@ const TaskDetails = ({currentTask, showModal}:TaskDetailsProps) => {
                 <span className='taskDetailsStatus'><strong>{getStatusName(currentTask.taskStatus)}</strong><br/></span>
                 <strong>{currentTask.createdBy}</strong> opened this issue on {currentTask.creationDate.replace('T', ' ').slice(0,-8)}<br />
                 <textarea 
-                    className='taskDetailsDescription' 
+                    className='taskDetailsDescription'
+                    maxLength={250}
                     value={editedTaskDescription}
                     onChange={handleTaskDescriptionChange}
                 >

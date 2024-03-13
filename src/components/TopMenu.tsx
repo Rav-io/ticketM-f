@@ -5,7 +5,7 @@ const TaskDetails = () => {
     const navigate = useNavigate();
 
     const handleLogoClick = () => {
-        navigate(`/`);
+        navigate(`/dashboard`);
     };
 
     return(

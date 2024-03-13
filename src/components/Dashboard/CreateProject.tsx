@@ -3,17 +3,17 @@ import { useProjectContext } from '../Context';
 import { useAuth } from '../../Auth';
 
 interface CreateProjectProps {
-  closeModal: (value: boolean) => void;
+  openModal: (value: boolean) => void;
 }
 
-const CreateProject = ({closeModal}:CreateProjectProps) => {
+const CreateProject = ({openModal}:CreateProjectProps) => {
     const { setNewProjectAdded } = useProjectContext();
     const [newProjectName, setNewProjectName] = useState<string>('');
     const [errorText, setErrorText] = useState<string>('');
     const { token } = useAuth();
 
     const handleModalClose = () => {
-        closeModal(false);
+        openModal(false);
         setNewProjectName('');
       };
     
@@ -36,7 +36,7 @@ const CreateProject = ({closeModal}:CreateProjectProps) => {
         })
             .then((response) => {
                 if (response.ok) {
-                    closeModal(false);
+                    openModal(false);
                     setNewProjectName('');
                     setNewProjectAdded(true);
                 }

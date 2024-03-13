@@ -8,7 +8,7 @@ const LoginPage = () => {
     const [password, setPassword] = useState<string>('');
     const [error, setError] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(false);
-    const { setCurrentUser } = useProjectContext();
+    const { setCurrentUser, setCurrentUserRole } = useProjectContext();
     const { login, token } = useAuth();
     const navigate = useNavigate();
 
@@ -18,7 +18,7 @@ const LoginPage = () => {
         }
     }, [token, navigate]);
 
-    const loginUser = async (username: string, password: string): Promise<{ token: string, user: string }> => {
+    const loginUser = async (username: string, password: string): Promise<{ token: string, user: string, role: string }> => {
         const apiUrl = 'https://localhost:7091/api/user/login';
         const requestData = {
             userName: username,
@@ -51,7 +51,8 @@ const LoginPage = () => {
             setLoading(true);
             const data = await loginUser(username, password);
             login(data.token);
-            setCurrentUser(data.user)
+            setCurrentUser(data.user);
+            setCurrentUserRole(data.role);
             navigate('/dashboard');
         } catch (error:any) {
             setError(error.message);
@@ -61,11 +62,18 @@ const LoginPage = () => {
         }
     };
 
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLFormElement>) => {
+        if (e.key === 'Enter') {
+            e.preventDefault(); // Prevent form submission on Enter key
+            handleLogin();
+        }
+    };
+
     return (
         <div className="loginPageContainer">
             <div className="login_form">
                 <h2 className="login">Login</h2>
-                <form className="loginForm">
+                <form className="loginForm" onKeyDown={handleKeyDown}>
                     <label className="loginLabel">
                         Username:
                         <input

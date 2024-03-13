@@ -121,14 +121,13 @@ const CreateTask = () => {
                         onChange={(e) => setTaskName(e.target.value)}>
                     </input><br />
                     <span><b>Task Description: </b></span><br />
-                    <input
-                        type='text'
+                    <textarea
                         className='inputTaskDescription'
                         placeholder="Enter Task Description"
-                        maxLength={100}
+                        maxLength={250}
                         value={taskDescription}
                         onChange={(e) => setTaskDescription(e.target.value)}>
-                    </input><br />
+                    </textarea><br />
                     <span><b>Select Users: </b></span><br />
                     <select className="userSelect" multiple value={selectedUsers.map(String)} onChange={handleUserChange}>
                         {users.map((user) => (
